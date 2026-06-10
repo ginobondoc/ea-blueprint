@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The EA Blueprint by GB</title>
+<style>
+  :root {
+    --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+    --border:#30363d;--border2:#444c56;
+    --green:#2ea043;--green2:#3fb950;
+    --gbg:rgba(46,160,67,.12);--gbg2:rgba(63,185,80,.18);
+    --blue:#58a6ff;--bbg:rgba(88,166,255,.10);
+    --amber:#d29922;--abg:rgba(210,153,34,.12);
+    --red:#f85149;--rbg:rgba(248,81,73,.12);
+    --purple:#bc8cff;--pbg:rgba(188,140,255,.10);
+    --text:#e6edf3;--text2:#8b949e;--text3:#6e7681;
+    --white:#ffffff;
+    --rsm:6px;--rmd:8px;--rlg:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+  .screen{display:none}.screen.active{display:block}
+  .app{max-width:660px;margin:0 auto;padding:0 0 80px}
+
+  /* NAV */
+  .tnav{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+  .nlogo{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
+  .ndot{width:7px;height:7px;border-radius:50%;background:var(--green2)}
+  .nright{display:flex;align-items:center;gap:10px}
+  .npbar{width:70px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+  .npfill{height:100%;background:var(--green2);border-radius:2px;transition:width .5s ease}
+  .nlabel{font-size:12px;color:var(--text3)}
+
+  /* HOME */
+  .hhero{padding:44px 24px 32px;border-bottom:1px solid var(--border)}
+  .heyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--green2);margin-bottom:14px}
+  .hedot{width:5px;height:5px;border-radius:50%;background:var(--green2)}
+  .hh1{font-size:26px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:10px;letter-spacing:-.4px}
+  .hh1 em{color:var(--green2);font-style:normal}
+  .hsub{font-size:14px;color:var(--text2);line-height:1.75;max-width:480px;margin-bottom:18px}
+  .htags{display:flex;flex-wrap:wrap;gap:7px}
+  .htag{font-size:12px;padding:3px 9px;border-radius:var(--rsm);border:1px solid var(--border);color:var(--text2);background:var(--bg2)}
+  .hby{font-size:12px;color:var(--text3);margin-top:14px}
+  .hby span{color:var(--green2);font-weight:600}
+
+  /* PROGRESS */
+  .psec{padding:18px 24px;border-bottom:1px solid var(--border)}
+  .ptop{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+  .ptitle{font-size:13px;font-weight:600;color:var(--text)}
+  .pcnt{font-size:12px;color:var(--text3)}
+  .pbar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+  .pfill{height:100%;background:var(--green2);border-radius:3px;transition:width .5s ease}
+
+  /* MODULES */
+  .mslabel{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);padding:18px 24px 8px}
+  .mlist{padding:0 16px;display:flex;flex-direction:column;gap:8px}
+  .mcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:border-color .2s,background .2s}
+  .mcard:hover:not(.locked){border-color:var(--border2);background:var(--bg3)}
+  .mcard.locked{opacity:.4;cursor:not-allowed}
+  .mcard.done{border-color:var(--green);background:var(--gbg)}
+  .micon{width:44px;height:44px;border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--border)}
+  .minfo{flex:1;min-width:0}
+  .mnum{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:2px}
+  .mname{font-size:14px;font-weight:600;color:var(--text);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mdesc{font-size:12px;color:var(--text3)}
+  .mstat{font-size:15px;flex-shrink:0;color:var(--text3)}
+  .mcard.done .mstat{color:var(--green2)}
+
+  /* FINAL CTA */
+  .fcwrap{padding:14px 16px}
+  .fclocked{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:13px 16px;text-align:center;font-size:13px;color:var(--text3)}
+  .fcbtn{width:100%;background:var(--green);border:1px solid var(--green2);border-radius:var(--rlg);padding:13px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;transition:background .2s}
+  .fcbtn:hover{background:var(--green2)}
+
+  /* LESSON BAR */
+  .lbar{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
+  .bbtn{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:5px 11px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
+  .bbtn:hover{border-color:var(--border2);color:var(--text)}
+  .btitle{font-size:13px;font-weight:600;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bbadge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:var(--rsm);white-space:nowrap}
+
+  /* STEP TRACK */
+  .strk{padding:9px 16px 7px;border-bottom:1px solid var(--border);background:var(--bg2)}
+  .sdots{display:flex;gap:5px;margin-bottom:3px}
+  .sd{flex:1;height:3px;border-radius:2px;background:var(--bg3);transition:background .3s}
+  .sd.active{background:var(--blue)}
+  .sd.done{background:var(--green2)}
+  .sinfo{font-size:11px;color:var(--text3)}
+
+  /* LESSON BODY */
+  .lbody{padding:18px 16px}
+  .ls{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:20px;margin-bottom:11px}
+  .lsey{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:5px}
+  .lstitle{font-size:16px;font-weight:700;color:var(--white);margin-bottom:11px;line-height:1.35;letter-spacing:-.2px}
+  .lstxt{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:9px}
+  .lstxt:last-child{margin-bottom:0}
+  .lstxt strong{color:var(--text);font-weight:600}
+
+  .co{border-radius:var(--rmd);padding:11px 13px;margin:9px 0;font-size:13px;line-height:1.65;font-weight:500}
+  .co strong{font-weight:700}
+  .cg{background:var(--gbg);border:1px solid rgba(46,160,67,.3);color:#7ee787}
+  .cb{background:var(--bbg);border:1px solid rgba(88,166,255,.25);color:#79c0ff}
+  .ca{background:var(--abg);border:1px solid rgba(210,153,34,.3);color:#e3b341}
+  .cr{background:var(--rbg);border:1px solid rgba(248,81,73,.3);color:#ffa198}
+  .cp{background:var(--pbg);border:1px solid rgba(188,140,255,.25);color:#d2a8ff}
+
+  .ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:9px 0}
+  .ic{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rmd);padding:11px}
+  .icico{font-size:17px;margin-bottom:5px}
+  .ictitle{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
+  .ictxt{font-size:12px;color:var(--text3);line-height:1.5}
+
+  .scene{background:var(--pbg);border:1px solid rgba(188,140,255,.25);border-radius:var(--rmd);padding:13px;margin:9px 0}
+  .slabel{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--purple);margin-bottom:5px}
+  .stxt{font-size:13px;color:#d2a8ff;line-height:1.7}
+
+  .slist{margin:9px 0}
+  .si{display:flex;gap:9px;margin-bottom:8px;align-items:flex-start}
+  .sn{width:23px;height:23px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .st{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
+  .st strong{color:var(--text);font-weight:600}
+
+  .elist{margin:9px 0}
+  .er{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2);line-height:1.6}
+  .er:last-child{border-bottom:none}
+  .ei{font-size:16px;flex-shrink:0;width:23px;text-align:center}
+
+  .ctable{width:100%;border-collapse:collapse;margin:9px 0;font-size:12px}
+  .ctable th{background:var(--bg3);color:var(--text2);padding:8px 10px;text-align:left;font-weight:600;font-size:11px;border-bottom:1px solid var(--border)}
+  .ctable td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5}
+  .ctable tr:last-child td{border-bottom:none}
+  .ctable tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+
+  .tw{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .tg{font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--rsm);border:1px solid}
+  .tgg{background:var(--gbg);border-color:rgba(46,160,67,.4);color:#7ee787}
+  .tgb{background:var(--bbg);border-color:rgba(88,166,255,.3);color:#79c0ff}
+  .tga{background:var(--abg);border-color:rgba(210,153,34,.3);color:#e3b341}
+  .tgr{background:var(--rbg);border-color:rgba(248,81,73,.3);color:#ffa198}
+  .tgp{background:var(--pbg);border-color:rgba(188,140,255,.3);color:#d2a8ff}
+
+  /* QUIZ */
+  .qcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:19px;margin-bottom:11px}
+  .qnum{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin-bottom:5px}
+  .qq{font-size:15px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:13px}
+  .qopts{display:flex;flex-direction:column;gap:7px}
+  .qo{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rmd);padding:10px 12px;font-size:13px;color:var(--text2);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+  .qo:hover:not(:disabled){border-color:var(--border2);color:var(--text)}
+  .qo.correct{background:var(--gbg);border-color:var(--green);color:#7ee787;font-weight:500}
+  .qo.wrong{background:var(--rbg);border-color:var(--red);color:#ffa198}
+  .qo.reveal{background:var(--bbg);border-color:var(--blue);color:#79c0ff}
+  .qfb{display:none;border-radius:var(--rmd);padding:10px 12px;margin-top:9px;font-size:13px;line-height:1.6}
+  .qfb.show{display:block}
+  .qfb.ok{background:var(--gbg);border:1px solid rgba(46,160,67,.3);color:#7ee787}
+  .qfb.bad{background:var(--rbg);border:1px solid rgba(248,81,73,.3);color:#ffa198}
+
+  .navbtns{display:flex;justify-content:flex-end;margin-top:13px}
+  .btnp{background:var(--green);border:1px solid var(--green2);border-radius:var(--rmd);padding:9px 19px;font-size:13px;font-weight:600;color:var(--white);cursor:pointer;transition:background .15s}
+  .btnp:hover{background:var(--green2)}
+  .btnp:disabled{background:var(--bg3);border-color:var(--border);color:var(--text3);cursor:not-allowed}
+
+  /* FINAL */
+  .fhero{padding:28px 24px 20px;border-bottom:1px solid var(--border)}
+  .fhlabel{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--amber);margin-bottom:8px}
+  .fhtitle{font-size:20px;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:-.3px}
+  .fhsub{font-size:13px;color:var(--text2)}
+
+  /* RESULTS */
+  .rcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:22px;margin:14px 16px 11px;text-align:center}
+  .sring{width:90px;height:90px;border-radius:50%;margin:0 auto 13px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px solid}
+  .sring.pass{border-color:var(--green2);background:var(--gbg)}
+  .sring.fail{border-color:var(--red);background:var(--rbg)}
+  .snum{font-size:24px;font-weight:700;line-height:1}
+  .snum.pass{color:#7ee787}
+  .snum.fail{color:#ffa198}
+  .stag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .stag.pass{color:var(--green2)}
+  .stag.fail{color:var(--red)}
+  .rtitle{font-size:17px;font-weight:700;color:var(--white);margin-bottom:5px}
+  .rsub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:14px}
+  .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+  .rstat{background:var(--bg3);border-radius:var(--rmd);padding:10px;text-align:left}
+  .rstatl{font-size:11px;color:var(--text3);margin-bottom:3px}
+  .rstatv{font-size:17px;font-weight:700;color:var(--text)}
+  .cert{background:var(--gbg);border:1px solid rgba(46,160,67,.3);border-radius:var(--rlg);padding:15px;margin:0 16px 14px;text-align:center}
+  .cert h3{font-size:13px;font-weight:600;color:#7ee787;margin-bottom:4px}
+  .cert p{font-size:12px;color:rgba(126,231,135,.75);line-height:1.5}
+
+  @media(max-width:480px){.ig,.rgrid{grid-template-columns:1fr}.hh1{font-size:21px}.lstitle{font-size:14px}}
+</style>
+</head>
+<body>
+
+<div class="tnav">
+  <div class="nlogo"><div class="ndot"></div>The EA Blueprint <span style="color:var(--text3);font-weight:400;font-size:12px;margin-left:4px">by GB</span></div>
+  <div class="nright">
+    <div class="npbar"><div class="npfill" id="np" style="width:0%"></div></div>
+    <span class="nlabel" id="nl">0/4</span>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- HOME -->
+<div id="sh" class="screen active">
+  <div class="hhero">
+    <div class="heyebrow"><span class="hedot"></span>Free Training</div>
+    <h1 class="hh1">Your step-by-step guide to becoming a <em>great Executive Assistant</em></h1>
+    <p class="hsub">Built for complete beginners. No experience needed. Just follow the modules in order — by the end, you will know exactly what separates an average EA from one that executives trust completely.</p>
+    <div class="htags">
+      <span class="htag">4 Modules</span><span class="htag">Free</span><span class="htag">Beginner Friendly</span><span class="htag">Final Assessment</span>
+    </div>
+    <div class="hby">Crafted by <span>Gino Bondoc</span> · Senior Team Lead &amp; L&amp;D Specialist</div>
+  </div>
+
+  <div class="psec">
+    <div class="ptop"><span class="ptitle">Your progress</span><span class="pcnt" id="hc">0 of 4 modules complete</span></div>
+    <div class="pbar"><div class="pfill" id="hf" style="width:0%"></div></div>
+  </div>
+
+  <div class="mslabel">Modules — complete in order</div>
+  <div class="mlist">
+    <div class="mcard" id="mc-0" onclick="startMod(0)">
+      <div class="micon" style="background:var(--bbg)">🎯</div>
+      <div class="minfo"><div class="mnum">Module 1</div><div class="mname">Understanding the EA Role</div><div class="mdesc">What EAs really do, and why it matters</div></div>
+      <div class="mstat" id="ms-0">→</div>
+    </div>
+    <div class="mcard locked" id="mc-1" onclick="startMod(1)">
+      <div class="micon" style="background:var(--gbg)">📅</div>
+      <div class="minfo"><div class="mnum">Module 2</div><div class="mname">Calendar Management</div><div class="mdesc">Protecting and organizing an executive's time</div></div>
+      <div class="mstat" id="ms-1">🔒</div>
+    </div>
+    <div class="mcard locked" id="mc-2" onclick="startMod(2)">
+      <div class="micon" style="background:var(--pbg)">📬</div>
+      <div class="minfo"><div class="mnum">Module 3</div><div class="mname">Inbox Management</div><div class="mdesc">Sorting, filtering, and handling emails like a pro</div></div>
+      <div class="mstat" id="ms-2">🔒</div>
+    </div>
+    <div class="mcard locked" id="mc-3" onclick="startMod(3)">
+      <div class="micon" style="background:var(--abg)">👑</div>
+      <div class="minfo"><div class="mnum">Module 4</div><div class="mname">Supporting C-Level Executives</div><div class="mdesc">What changes when your executive is the CEO</div></div>
+      <div class="mstat" id="ms-3">🔒</div>
+    </div>
+  </div>
+
+  <div class="fcwrap">
+    <div id="fl" class="fclocked">🏆 Complete all 4 modules to unlock the Final Assessment</div>
+    <button id="fob" class="fcbtn" onclick="startFinal()" style="display:none">🏆 Take the Final Assessment — Prove You're Blueprint-Ready</button>
+  </div>
+</div>
+
+<!-- LESSON -->
+<div id="sl" class="screen">
+  <div class="lbar">
+    <button class="bbtn" onclick="goHome()">← Home</button>
+    <div class="btitle" id="bt"></div>
+    <span class="bbadge" id="bb"></span>
+  </div>
+  <div class="strk">
+    <div class="sdots" id="sd"></div>
+    <div class="sinfo" id="si">Step 1</div>
+  </div>
+  <div class="lbody" id="lb"></div>
+</div>
+
+<!-- FINAL -->
+<div id="sf" class="screen">
+  <div class="lbar">
+    <button class="bbtn" onclick="goHome()">← Home</button>
+    <div class="btitle">Final Assessment</div>
+    <span class="bbadge" style="background:var(--abg);border:1px solid rgba(210,153,34,.3);color:#e3b341" id="fb2">Q 1 of 10</span>
+  </div>
+  <div id="finalbody"></div>
+</div>
+
+</div>
+
+<script>
+var done=[false,false,false,false],cm=0,cs=0,qa={};
+
+var mods=[
+// ═══════════════════════════════════════════════════════
+// MODULE 1 — Understanding the EA Role
+// ═══════════════════════════════════════════════════════
+{title:"Understanding the EA Role",badge:"Module 1",bs:"background:var(--bbg);border:1px solid rgba(88,166,255,.3);color:#79c0ff",
+steps:[
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Let's start from zero</div>
+  <div class="lstitle">What is an Executive Assistant — really?</div>
+  <div class="lstxt">When most people hear "Executive Assistant," they picture someone booking meetings or answering phone calls. That image is outdated and completely undersells the role.</div>
+  <div class="co cb">💡 An EA is a <strong>strategic partner</strong>. While the executive focuses on leading the company, the EA makes sure everything around them runs without friction — time, communication, and priorities all handled.</div>
+  <div class="lstxt">Here is the clearest way to say it: <strong>an EA helps their executive spend time only on things that truly require the executive's mind.</strong> Everything else — the EA handles.</div>
+  <div class="co cg">📌 Simple definition: An Executive Assistant manages time, information, and priorities on behalf of their executive — so the executive can lead without distraction.</div>
+</div>
+<div class="ls">
+  <div class="lstitle">Let's clear up the biggest myths</div>
+  <div class="lstxt">There are many wrong ideas floating around about this role. Here are the most common — and the truth behind each one:</div>
+  <div class="elist">
+    <div class="er"><div class="ei">❌</div><div><strong>"It's just scheduling."</strong> Wrong. Scheduling is one small part. The real job is protecting the executive's priorities and enabling their best performance.</div></div>
+    <div class="er"><div class="ei">❌</div><div><strong>"Anyone organized can do it."</strong> Wrong. It takes business judgment, emotional intelligence, and the ability to act without being told every single step.</div></div>
+    <div class="er"><div class="ei">❌</div><div><strong>"EAs just take orders."</strong> Wrong. Great EAs anticipate what their executive needs before they even ask for it.</div></div>
+    <div class="er"><div class="ei">❌</div><div><strong>"It's a low-impact role."</strong> Wrong. A great EA saves their executive 5 to 10 hours every week. Multiply that over a year — that's hundreds of hours of leadership time recovered.</div></div>
+    <div class="er"><div class="ei">❌</div><div><strong>"AI will take over this role."</strong> Wrong. AI handles repetitive tasks. EAs provide judgment, trust, and human understanding — things no tool can replicate.</div></div>
+  </div>
+  <div class="co ca">🔑 The EA role is not shrinking. Executives need more support than ever before, and the best EAs are more valuable than ever.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">The three pillars</div>
+  <div class="lstitle">What does an EA actually do every single day?</div>
+  <div class="lstxt">EA responsibilities fall into three core areas. Think of these as the foundation of every task you will ever do in this role:</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">⏰</div><div class="ictitle">Time Orchestration</div><div class="ictxt">Calendar management, scheduling meetings, and making sure the executive is always prepared — never caught off guard.</div></div>
+    <div class="ic"><div class="icico">💬</div><div class="ictitle">Communication Command</div><div class="ictxt">Managing the inbox, drafting messages, ensuring the right people get timely responses — without the executive spending hours on email.</div></div>
+    <div class="ic"><div class="icico">🗂</div><div class="ictitle">Logistics and Projects</div><div class="ictxt">Travel arrangements, document management, research, and light project support that keeps operations moving.</div></div>
+    <div class="ic"><div class="icico">🔐</div><div class="ictitle">The Silent Layer</div><div class="ictxt">Confidentiality, gatekeeping, discretion, and representing the executive professionally in every interaction.</div></div>
+  </div>
+  <div class="co cb">👀 <strong>What a real EA day looks like:</strong> Scan email for urgent items → prep meeting materials → filter two last-minute meeting requests → draft a client response → coordinate a flight change → sit in on a strategy call to capture action items → send an end-of-day briefing. All before 6pm.</div>
+</div>
+<div class="ls">
+  <div class="lstitle">Why EAs matter beyond just the executive</div>
+  <div class="elist">
+    <div class="er"><div class="ei">⏱</div><div><strong>Time recovery.</strong> EAs give back 5–10 hours every week to the executive by absorbing tasks that don't require executive-level attention.</div></div>
+    <div class="er"><div class="ei">⚡</div><div><strong>Force multiplier effect.</strong> One great EA makes the entire leadership team more effective — not just the executive they support.</div></div>
+    <div class="er"><div class="ei">🔗</div><div><strong>Organizational visibility.</strong> EAs attend key meetings, capture decisions, and make sure the right people stay aligned across teams.</div></div>
+    <div class="er"><div class="ei">🌡</div><div><strong>Culture and communication.</strong> EAs are often the connective tissue of an organization — they know what's happening, and they help keep things running smoothly at every level.</div></div>
+  </div>
+  <div class="co cg">The best way to describe a truly great EA: <strong>"The executive never had to think about it."</strong> That's the standard.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">What separates average from exceptional</div>
+  <div class="lstitle">The 7 skills that define an exceptional EA</div>
+  <div class="lstxt">Being organized is a starting point — not a finish line. These are the seven skills that truly separate great EAs from the rest:</div>
+  <div class="slist">
+    <div class="si"><div class="sn">1</div><div class="st"><strong>Prioritization and Judgment</strong> — When five things feel urgent at the same time, you know which one actually is. You act correctly without needing to ask permission every time.</div></div>
+    <div class="si"><div class="sn">2</div><div class="st"><strong>Proactiveness</strong> — You don't wait to be told. You see what's coming, prepare for it, and prevent problems before they happen.</div></div>
+    <div class="si"><div class="sn">3</div><div class="st"><strong>Tech Fluency</strong> — Calendar tools, email platforms, communication apps, project trackers — you don't need to be an engineer, but you pick up new tools quickly and use them well.</div></div>
+    <div class="si"><div class="sn">4</div><div class="st"><strong>Communication Skills</strong> — You write clearly. You speak professionally. You represent your executive in every message, meeting, and interaction.</div></div>
+    <div class="si"><div class="sn">5</div><div class="st"><strong>Emotional Intelligence</strong> — You read the room. You know when your executive is stressed and needs space versus needing a quick update. You build trust naturally at every level of an organization.</div></div>
+    <div class="si"><div class="sn">6</div><div class="st"><strong>Discretion</strong> — You will have access to confidential business information, financial data, and personal matters. None of it leaves the room. Not with colleagues. Not with family. Not online.</div></div>
+    <div class="si"><div class="sn">7</div><div class="st"><strong>Workflow Ownership</strong> — You own the systems you manage. If something is broken, you fix it. You don't wait for someone to notice. You don't ask to be micromanaged.</div></div>
+  </div>
+</div>
+<div class="ls">
+  <div class="lstitle">The EA–Executive relationship: how trust is built</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">🤝</div><div class="ictitle">Trust</div><div class="ictxt">The executive shares sensitive information. You earn that access by protecting it completely.</div></div>
+    <div class="ic"><div class="icico">🔄</div><div class="ictitle">Communication Rhythm</div><div class="ictxt">You sync constantly. You know their preferences, energy patterns, and decision-making style cold.</div></div>
+    <div class="ic"><div class="icico">🚀</div><div class="ictitle">Earned Autonomy</div><div class="ictxt">Over time, you make decisions without asking. You know what they would say — so you just say it for them.</div></div>
+    <div class="ic"><div class="icico">🎯</div><div class="ictitle">The Benchmark</div><div class="ictxt">"I didn't even have to think about it." When your executive says this, you have arrived.</div></div>
+  </div>
+  <div class="co cg">✅ Trust is not given. It is earned through consistency, discretion, and doing the right thing even when no one is watching.</div>
+</div>`},
+
+{type:"quiz",qn:1,q:"Which of these BEST describes the primary role of an Executive Assistant?",
+opts:["Booking flights, answering calls, and keeping the office organized","A strategic partner who manages time, information, and priorities so the executive can lead without distraction","Managing social media accounts and creating presentations","Handling payroll, HR paperwork, and company compliance"],
+c:1,ok:"✅ Exactly right. An EA is a strategic partner — the person who makes sure the executive's time, information, and priorities are protected so they can do their best work.",bad:"❌ Not quite. An EA does far more than logistics. The heart of the role is protecting the executive's time, filtering information, and enabling better leadership decisions."},
+
+{type:"quiz",qn:2,q:"Your executive is getting flooded with meeting requests from people across the company during their most critical work hours. What is your job here?",
+opts:["Let the executive handle it — it is their schedule to manage","Tell everyone to stop sending meeting requests","Act as a gatekeeper: evaluate each request, protect focus time, and handle responses professionally","Schedule all the requests and let the executive sort it out later"],
+c:2,ok:"✅ That's it. Gatekeeping is one of the most important things an EA does. Your job is to filter, evaluate, and protect the executive's time — so they can stay focused on what actually matters.",bad:"❌ Letting the executive manage their own flood of requests means they're wasting time on something you can handle. Your job is to gatekeep — evaluate requests and protect their focus time."}
+]},
+
+// ═══════════════════════════════════════════════════════
+// MODULE 2 — Calendar Management
+// ═══════════════════════════════════════════════════════
+{title:"Calendar Management",badge:"Module 2",bs:"background:var(--gbg);border:1px solid rgba(46,160,67,.3);color:#7ee787",
+steps:[
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">More than just scheduling</div>
+  <div class="lstitle">What calendar management actually means</div>
+  <div class="lstxt">Put a meeting on the calendar. Done. That's what most people think calendar management is. <strong>It is not even close.</strong></div>
+  <div class="lstxt">A calendar is a map of an executive's priorities. Every hour on it is an hour they can never take back. A bloated, unmanaged calendar produces a scattered leader who is always behind. A clean, intentional calendar produces a focused leader who makes better decisions.</div>
+  <div class="co cg">💡 <strong>Good calendar management is not scheduling. It is executive enablement.</strong> You are deciding — on their behalf — what deserves their time and what does not.</div>
+  <div class="elist">
+    <div class="er"><div class="ei">🛡</div><div><strong>It protects the executive's time.</strong> Not every request for a meeting deserves a yes.</div></div>
+    <div class="er"><div class="ei">🎯</div><div><strong>It enables strategic focus.</strong> An executive cannot think clearly when their day is a wall of meetings with no breathing room.</div></div>
+    <div class="er"><div class="ei">⚖️</div><div><strong>It prevents burnout.</strong> Back-to-back meetings without breaks leads to exhaustion, bad decisions, and resentment.</div></div>
+    <div class="er"><div class="ei">🤝</div><div><strong>It improves team coordination.</strong> When meetings are structured and purposeful, the whole organization runs better.</div></div>
+    <div class="er"><div class="ei">🔍</div><div><strong>It reflects real priorities.</strong> The calendar tells you — and everyone else — what the executive actually values.</div></div>
+  </div>
+</div>
+<div class="ls">
+  <div class="lstitle">Which type of EA are you building toward?</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">😟</div><div class="ictitle">The Order-Taker EA</div><div class="ictxt">Says yes to every request. The calendar fills up. Executive has no time to think. Everything feels urgent. Nothing gets done well.</div></div>
+    <div class="ic"><div class="icico">😊</div><div class="ictitle">The Strategic EA</div><div class="ictxt">Evaluates every request. Protects focus blocks. Adds buffers. The executive shows up prepared, rested, and effective every single day.</div></div>
+  </div>
+  <div class="co ca">⚠️ Your goal is always to be the strategic EA. Filling a calendar is easy. Managing a calendar is a skill.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Your review checklist</div>
+  <div class="lstitle">Six things to check every time you look at a calendar</div>
+  <div class="lstxt">Whether you are building a calendar from scratch or reviewing one that already exists, run through these six checks every time:</div>
+  <div class="slist">
+    <div class="si"><div class="sn">1</div><div class="st"><strong>Conflicts and overlaps.</strong> Are two things scheduled at the same time? Does one meeting bleed directly into the next with zero gap? Identify and fix these before your executive sees them.</div></div>
+    <div class="si"><div class="sn">2</div><div class="st"><strong>Buffer time between meetings.</strong> After any intensive meeting — a 1:1, a client call, a tough strategy discussion — the executive needs 10 to 15 minutes to reset, take notes, and shift gears. Build this in as a real calendar block.</div></div>
+    <div class="si"><div class="sn">3</div><div class="st"><strong>Recurring meetings that can be consolidated.</strong> If something happens daily and could be weekly, that change alone can free up hours. Look for meeting patterns that are habit, not necessity.</div></div>
+    <div class="si"><div class="sn">4</div><div class="st"><strong>Protected deep work time.</strong> Every executive needs uninterrupted thinking time. Block it. Label it. Defend it from meeting requests. This is where their best work happens.</div></div>
+    <div class="si"><div class="sn">5</div><div class="st"><strong>Personal and family commitments.</strong> If your executive has a hard stop at a certain time, a recurring personal appointment, or family obligations — these are non-negotiable and must be protected on the calendar without exception.</div></div>
+    <div class="si"><div class="sn">6</div><div class="st"><strong>Admin and review time.</strong> When will the executive read reports, sign approvals, review decks? Schedule a dedicated admin block so these tasks don't pile up and get done at midnight.</div></div>
+  </div>
+  <div class="co cb">📌 Always place the buffer and the focus block first. Then schedule everything else around them — never the reverse.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Real-world scenario</div>
+  <div class="lstitle">Let's fix a broken calendar — meet Alex Rivera</div>
+  <div class="scene">
+    <div class="slabel">📋 Your client situation</div>
+    <div class="stxt"><strong>Alex Rivera</strong> is the CEO of a growing e-commerce brand. They have two young children in school and a partner who works full time. Here is what their current week looks like:<br><br>
+    • Every morning starts with an all-hands team standup at 9am<br>
+    • Daily 40-minute 1:1 with their Head of Customer Experience<br>
+    • Daily check-in with the Operations Director and the Product Lead<br>
+    • Back-to-back department reviews every Wednesday afternoon<br>
+    • A standing weekly meeting with two external brand consultants<br>
+    • No designated lunch break — eats at the desk or skips entirely<br>
+    • No protected focus time anywhere in the week<br>
+    • <strong>Catches up on investor reporting every Saturday morning, 3+ hours</strong><br>
+    • School pickup for kids at 4:30pm — but meetings regularly run over
+    </div>
+  </div>
+  <div class="co cr">❌ The problems: zero breathing room between meetings, no deep work blocks, no real lunch, working every Saturday, and the school pickup is constantly at risk.</div>
+</div>
+<div class="ls">
+  <div class="lstitle">How a Blueprint EA would fix Alex's week</div>
+  <div class="lstxt">First, confirm the non-negotiables:</div>
+  <div class="tw">
+    <span class="tg tgg">✅ School pickup by 4:30pm daily</span>
+    <span class="tg tgg">✅ Weekly touchpoints with each team</span>
+    <span class="tg tgg">✅ Protected deep work every day</span>
+    <span class="tg tgg">✅ No Saturday work</span>
+    <span class="tg tgg">✅ A real lunch break</span>
+  </div>
+  <div class="slist">
+    <div class="si"><div class="sn">1</div><div class="st"><strong>Convert daily 1:1s to weekly.</strong> The daily 40-min Customer Experience 1:1 becomes a 50-min weekly session. Same with Ops and Product. This alone recovers over 3 hours each week.</div></div>
+    <div class="si"><div class="sn">2</div><div class="st"><strong>Add 15-minute buffers after every intensive meeting.</strong> Block these on the calendar so they cannot be booked over. They are not free time — they are recovery time.</div></div>
+    <div class="si"><div class="sn">3</div><div class="st"><strong>Block a 45-minute daily focus window from 3:00–3:45pm.</strong> No meetings. No calls. This is where Alex reviews investor reports during the week — which eliminates the Saturday catch-up entirely.</div></div>
+    <div class="si"><div class="sn">4</div><div class="st"><strong>Block a 30-minute lunch at 12:30pm daily.</strong> Non-negotiable. Label it "lunch" on the calendar so it is visible and respected by the whole team.</div></div>
+    <div class="si"><div class="sn">5</div><div class="st"><strong>Hard cut-off: all meetings must end by 4:15pm.</strong> This gives Alex a 15-minute buffer before the 4:30pm pickup. No exceptions. New meeting requests that fall after 4:00pm get redirected to the next morning.</div></div>
+  </div>
+  <div class="co cg">✅ Alex gets their Saturdays back. Deep work is protected. The team still gets their touchpoints. The pickup is never at risk. That's what Blueprint calendar management looks like.</div>
+</div>`},
+
+{type:"quiz",qn:1,q:"Alex's calendar shows five meetings scheduled back-to-back from 9am to 1pm with zero gaps. What should you do first?",
+opts:["Cancel two of the meetings to free up Alex's morning","Insert 10–15 minute buffer blocks between each meeting before touching anything else","Move all five meetings to the afternoon","Tell Alex they need to stop accepting so many meetings"],
+c:1,ok:"✅ Correct. Buffers first — always. This is low-disruption and high-impact. It gives Alex breathing room without canceling or rescheduling anything, and you can do it without needing their input.",bad:"❌ Canceling or moving meetings without checking with Alex first is overstepping. The right first move is always to add buffer time. It's non-disruptive, immediately helpful, and entirely within your authority as EA."},
+
+{type:"quiz",qn:2,q:"Alex currently works every Saturday morning for 3+ hours catching up on investor reports. What is the root cause — and how do you fix it?",
+opts:["Accept it — some executives just prefer working on weekends","There is no protected review time during the week. Fix it by blocking a daily focus window on weekdays so the Saturday work is no longer needed","Ask Alex to write the reports faster","Remove investor reporting from Alex's responsibilities"],
+c:1,ok:"✅ Exactly right. A great EA identifies root causes, not just symptoms. Alex works Saturdays because there is nowhere in the week to do that work. Create that space during the week and the Saturday sessions disappear.",bad:"❌ Accepting unnecessary weekend work as a permanent fixture is not strategic EA thinking. The fix is to find why it's happening and solve it — by creating protected review time inside the regular work week."}
+]},
+
+// ═══════════════════════════════════════════════════════
+// MODULE 3 — Inbox Management
+// ═══════════════════════════════════════════════════════
+{title:"Inbox Management",badge:"Module 3",bs:"background:var(--pbg);border:1px solid rgba(188,140,255,.3);color:#d2a8ff",
+steps:[
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Signal vs noise</div>
+  <div class="lstitle">What inbox management really means — and why it matters</div>
+  <div class="lstxt">A senior executive can receive anywhere from 100 to 300 emails per day. Without a system in place, critical messages get buried under newsletters, cold pitches, and internal announcements. A missed message from a key client or investor can damage relationships and cost real money.</div>
+  <div class="co cp">💡 <strong>Inbox management</strong> is the process of organizing, filtering, routing, and maintaining control over email — so only the most relevant, timely, and actionable messages ever reach the executive's attention.</div>
+  <div class="lstxt">But it goes deeper than organization. Good inbox management does three fundamental things:</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">🛡</div><div class="ictitle">Protects Focus</div><div class="ictxt">The executive only sees what requires their attention. Everything else is handled, archived, or routed by you.</div></div>
+    <div class="ic"><div class="icico">⚡</div><div class="ictitle">Speeds Up Response</div><div class="ictxt">A labeled, sorted inbox means the executive can process what matters in 20 minutes instead of 2 hours.</div></div>
+    <div class="ic"><div class="icico">🧠</div><div class="ictitle">Enables Clearer Decisions</div><div class="ictxt">When the inbox is clean, the executive's mental energy goes toward decisions — not email triage.</div></div>
+    <div class="ic"><div class="icico">🔐</div><div class="ictitle">Protects Boundaries</div><div class="ictxt">Cold pitches, spam, and low-priority noise never reach the executive's primary view.</div></div>
+  </div>
+</div>
+<div class="ls">
+  <div class="lstitle">The difference a system makes</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">😰</div><div class="ictitle">No system</div><div class="ictxt">Important emails get buried. Executive spends 2+ hours daily on email. Decisions are delayed. Relationships suffer.</div></div>
+    <div class="ic"><div class="icico">😌</div><div class="ictitle">With a system</div><div class="ictxt">Urgent items surface within minutes. Executive spends 20 minutes on email. Responses go out fast. People feel valued.</div></div>
+  </div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">The sorting system</div>
+  <div class="lstitle">How to label and categorize every email that comes in</div>
+  <div class="lstxt">When you take over an inbox, your first job is to build a consistent labeling system. Every email has a home. Here are the categories that matter most:</div>
+  <div class="elist">
+    <div class="er"><div class="ei">🔥</div><div><strong>Urgent / Time-Sensitive</strong> — Needs the executive's attention today or within the hour. Examples: a rescheduled board call, a client escalation, a same-day deadline. Do not just label these — alert the executive directly and immediately.</div></div>
+    <div class="er"><div class="ei">📅</div><div><strong>Scheduling Requests</strong> — Anyone asking for the executive's time. You handle these. Accept, decline, or propose alternatives without needing to involve the executive every time.</div></div>
+    <div class="er"><div class="ei">✅</div><div><strong>Action Required by Executive</strong> — Decisions, approvals, sign-offs. The executive must take action on these. Surface them clearly, and provide context so they can decide quickly.</div></div>
+    <div class="er"><div class="ei">⏳</div><div><strong>Waiting / Pending Follow-Up</strong> — You are waiting for a response from someone else. Track these and follow up proactively if they go silent.</div></div>
+    <div class="er"><div class="ei">📈</div><div><strong>Internal Updates</strong> — Reports, project statuses, team announcements. You read these yourself, extract what is relevant, and surface it in a brief — not as forwarded emails.</div></div>
+    <div class="er"><div class="ei">👤</div><div><strong>Client and Partner Emails</strong> — High priority. External relationships must never feel ignored. Respond promptly or flag for the executive with a draft response ready.</div></div>
+    <div class="er"><div class="ei">🧾</div><div><strong>Finance and Invoices</strong> — Bills, invoices, receipts. Route to accounting or flag for executive sign-off based on the amount and urgency.</div></div>
+    <div class="er"><div class="ei">⛔</div><div><strong>Low Priority — Read Later</strong> — Newsletters, industry updates, optional webinars. Archive or route to a separate reading folder. The executive never needs to see these in their primary inbox.</div></div>
+    <div class="er"><div class="ei">🚫</div><div><strong>Spam and Cold Outreach</strong> — Delete or auto-filter. These should never reach the executive at all.</div></div>
+  </div>
+  <div class="co ca">⚠️ Critical rule: if something is genuinely urgent, labeling is not enough. You pick up the phone, send a Slack message, or walk over — whatever it takes to make sure the executive knows right now.</div>
+</div>
+<div class="ls">
+  <div class="lstitle">Building a sustainable inbox rhythm</div>
+  <div class="slist">
+    <div class="si"><div class="sn">AM</div><div class="st"><strong>Every morning:</strong> Scan the inbox for anything time-sensitive that came in overnight. Alert the executive if needed. Update the calendar based on any new scheduling requests.</div></div>
+    <div class="si"><div class="sn">PM</div><div class="st"><strong>During the day:</strong> Monitor for incoming urgent items. Draft responses for executive review and approval. Follow up on pending threads that have gone quiet for too long.</div></div>
+    <div class="si"><div class="sn">WK</div><div class="st"><strong>Every Friday:</strong> Send the executive a Weekly Inbox Summary — what was handled, what was escalated, what needs their review, and anything to watch for next week.</div></div>
+  </div>
+  <div class="co cb">📌 The Weekly Inbox Summary is one of the most powerful habits a Blueprint EA can build. It keeps the executive informed without pulling them into the details.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Real-world scenario</div>
+  <div class="lstitle">Let's sort a real inbox — 10 emails, all unread, all mixed together</div>
+  <div class="scene">
+    <div class="slabel">📬 The inbox — your executive is Marcus Webb, VP of Operations</div>
+    <div class="stxt">
+      1. Rachel Tan (investor): <em>"Following up on Q3 deck — need response today"</em><br>
+      2. James Okonkwo (legal): <em>"Contract revision ready for your review and signature"</em><br>
+      3. Team Slack digest: <em>"Weekly engineering standup notes — Week 42"</em><br>
+      4. Promo email: <em>"Flash sale: 40% off project management software!"</em><br>
+      5. Claire Santos (direct report): <em>"Can we move our 1:1 from Thursday to Wednesday?"</em><br>
+      6. Accounts payable: <em>"Invoice #4421 from Vertex Logistics — due in 5 days"</em><br>
+      7. Newsletter: <em>"Top 10 leadership habits of Fortune 500 CEOs"</em><br>
+      8. Claire Santos: <em>"Update: vendor negotiation summary — FYI"</em><br>
+      9. CEO (David Lim): <em>"URGENT — board pre-read moved to 2pm today, not 4pm"</em><br>
+      10. Rachel Tan: <em>"Re: partnership proposal — waiting on your team's feedback"</em>
+    </div>
+  </div>
+  <div class="lstxt">Here is exactly how a Blueprint EA handles this inbox in under 5 minutes:</div>
+  <div class="elist">
+    <div class="er"><div class="ei">🔥</div><div><strong>Email 9 — First.</strong> Board pre-read moved to 2pm TODAY. Alert Marcus immediately via Slack or phone. Update the calendar right now. This is mission-critical.</div></div>
+    <div class="er"><div class="ei">🔥</div><div><strong>Email 1 — Second.</strong> Investor needs a response today. Flag as Urgent. Draft a holding response acknowledging receipt and commit to a time. Surface to Marcus for review within the hour.</div></div>
+    <div class="er"><div class="ei">✅</div><div><strong>Email 2 — Action Required.</strong> Legal contract needs a signature. Label it, confirm the deadline, and add it to Marcus's review queue for today or tomorrow.</div></div>
+    <div class="er"><div class="ei">📅</div><div><strong>Email 5 — Scheduling Request.</strong> Claire wants to shift the 1:1. Check the calendar. If Wednesday works, confirm it for both parties without involving Marcus.</div></div>
+    <div class="er"><div class="ei">🧾</div><div><strong>Email 6 — Finance.</strong> Invoice due in 5 days. Route to accounts payable or flag for approval depending on the amount threshold.</div></div>
+    <div class="er"><div class="ei">⏳</div><div><strong>Email 10 — Pending Follow-Up.</strong> Investor is waiting on feedback from Marcus's team. Track this. Follow up with the relevant team member today.</div></div>
+    <div class="er"><div class="ei">📈</div><div><strong>Email 8 — Internal Update.</strong> Read it yourself. Extract key points. Include in the Friday weekly summary — do not forward the raw email.</div></div>
+    <div class="er"><div class="ei">⛔</div><div><strong>Emails 3, 4, 7 — Low Priority / Noise.</strong> Engineering digest → archive. Software promo → delete. Leadership newsletter → archive to reading folder. Marcus never sees any of these.</div></div>
+  </div>
+  <div class="co cg">✅ In under 5 minutes: 10 chaotic emails become a clear action list. Marcus only needs to act on 3 items. Everything else is handled. That is the Blueprint in action.</div>
+</div>`},
+
+{type:"quiz",qn:1,q:"Email 9 arrives in Marcus's inbox: 'URGENT — board pre-read moved to 2pm today, not 4pm.' What do you do first?",
+opts:["Add it to the weekly summary — Marcus will see it during his Friday review","Label it Urgent and move to the next email","Alert Marcus immediately via Slack, phone, or in-person — then update the calendar right now","Wait until the next time you check the inbox before acting"],
+c:2,ok:"✅ Yes. Urgent time-sensitive items require immediate action — not labeling and moving on. The board pre-read time has changed. Every minute you delay risks Marcus showing up to the wrong time. Alert him now.",bad:"❌ This is the most urgent type of email an EA will encounter. The meeting time has changed for today. Labeling it, summarizing it later, or waiting are all the wrong moves. Alert Marcus immediately, then update the calendar."},
+
+{type:"quiz",qn:2,q:"Marcus's inbox contains a software promo email, a leadership newsletter, and a cold pitch from a vendor he doesn't know. What is the correct action?",
+opts:["Forward them to Marcus — he might find them interesting on a slow day","Leave them unread so Marcus can decide if he wants to read them","Delete or auto-archive all three immediately — low-priority noise should never reach the executive's primary view","Reply to each sender asking whether their message is important"],
+c:2,ok:"✅ Correct. An EA's job is to filter noise so the executive never has to see it. Promos, newsletters, and unsolicited cold pitches all go to archive or trash — immediately and without hesitation.",bad:"❌ Sending Marcus unnecessary emails wastes his time and mental energy. A Blueprint EA filters these out completely before they ever reach the executive. These three emails belong in archive or trash."}
+]},
+
+// ═══════════════════════════════════════════════════════
+// MODULE 4 — Supporting C-Level Executives
+// ═══════════════════════════════════════════════════════
+{title:"Supporting C-Level Executives",badge:"Module 4",bs:"background:var(--abg);border:1px solid rgba(210,153,34,.3);color:#e3b341",
+steps:[
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">The highest level of support</div>
+  <div class="lstitle">Who are C-Level executives — and what makes them different?</div>
+  <div class="lstxt">The "C" in C-Level stands for "Chief." These are the most senior leaders in any organization — the people whose decisions affect every employee, every client, and the future direction of the company.</div>
+  <div class="ig">
+    <div class="ic"><div class="icico">👑</div><div class="ictitle">CEO</div><div class="ictxt">Chief Executive Officer. Sets the overall direction of the company and is accountable for everything.</div></div>
+    <div class="ic"><div class="icico">💰</div><div class="ictitle">CFO</div><div class="ictxt">Chief Financial Officer. Owns the company's financial health, budgets, and investor relationships.</div></div>
+    <div class="ic"><div class="icico">⚙️</div><div class="ictitle">COO</div><div class="ictxt">Chief Operating Officer. Translates strategy into execution — keeps the entire operation running.</div></div>
+    <div class="ic"><div class="icico">📣</div><div class="ictitle">CMO</div><div class="ictxt">Chief Marketing Officer. Owns brand, growth, and how the company shows up in the world.</div></div>
+  </div>
+  <div class="co cr">⚠️ Supporting a C-Level executive is categorically different from supporting a department manager. The stakes are higher, the pace is faster, the confidentiality requirements are strict, and the consequences of a mistake are amplified at every level.</div>
+</div>
+<div class="ls">
+  <div class="lstitle">C-Level vs regular executive — what actually changes</div>
+  <table class="ctable">
+    <tr><th>Area</th><th>C-Level Executive</th><th>Regular Executive</th></tr>
+    <tr><td>Primary focus</td><td>Strategy, vision, risk</td><td>Team execution and operations</td></tr>
+    <tr><td>What they need from EA</td><td>Proactivity, filtering, strategic thinking</td><td>Responsiveness, support, task execution</td></tr>
+    <tr><td>Communication style</td><td>Fast, direct, high-stakes</td><td>Collaborative, informational</td></tr>
+    <tr><td>External visibility</td><td>Board, investors, media, public</td><td>Department or team only</td></tr>
+    <tr><td>Time precision</td><td>Minute-to-minute</td><td>Meeting-heavy but more flexible</td></tr>
+    <tr><td>Confidentiality level</td><td>Very high — board matters, M&A, leadership changes</td><td>Moderate — team-level matters</td></tr>
+  </table>
+  <div class="co ca">🔑 The fundamental shift: a C-Level executive doesn't need someone to complete a checklist. They need someone who thinks ahead, makes judgment calls, and protects their focus without being asked.</div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">Raising your standard</div>
+  <div class="lstitle">What C-Level executives actually expect from their EA</div>
+  <div class="lstxt">Five things matter above all else when you are supporting a C-Level executive:</div>
+  <div class="slist">
+    <div class="si"><div class="sn">1</div><div class="st"><strong>Be a trusted gatekeeper.</strong> You are the filter between the world and the executive's attention. Not every request gets through. Not every email gets a personal reply. You decide — with professionalism, judgment, and the executive's priorities always in mind.</div></div>
+    <div class="si"><div class="sn">2</div><div class="st"><strong>Develop a strategic lens.</strong> You need to understand the business at a real level. What are the company's biggest goals right now? Who are the most important clients and partners? What decisions is the executive wrestling with? You cannot protect someone's priorities if you don't understand what those priorities are.</div></div>
+    <div class="si"><div class="sn">3</div><div class="st"><strong>Carry executive presence.</strong> In every email you write, every call you take, and every interaction you have on behalf of the executive — you represent them. Be calm, clear, professional, and composed. Even when things are chaotic, you are the steady one.</div></div>
+    <div class="si"><div class="sn">4</div><div class="st"><strong>Maintain absolute discretion.</strong> You will be trusted with information that very few people in the company will ever know. Financial data, personnel decisions, legal matters, personal circumstances. None of this is shared with anyone — not colleagues, not friends, not family, not online. Ever. Non-negotiable.</div></div>
+    <div class="si"><div class="sn">5</div><div class="st"><strong>Lead with anticipation.</strong> A board meeting is scheduled for three weeks from now — you start preparing materials today. A flight is booked during a national holiday weekend — you check for disruptions and have a backup plan ready. Great EAs operate two steps ahead at all times.</div></div>
+  </div>
+  <div class="co cg">✅ The mindset that unlocks C-Level EA performance: <strong>stop being a task-taker and become a priority manager. Stop filling the schedule and start protecting it.</strong></div>
+</div>`},
+
+{type:"lesson",html:`
+<div class="ls">
+  <div class="lsey">How to communicate at this level</div>
+  <div class="lstitle">Communication tactics for C-Level EA support</div>
+  <div class="lstxt">When you support a C-Level executive, how you communicate — on your own behalf and on theirs — changes significantly:</div>
+  <div class="elist">
+    <div class="er"><div class="ei">✉️</div><div><strong>Lead with the decision, not the background.</strong> C-Level executives do not have time for paragraphs of context. Put the action item in the first line. "Approve or decline?" "Confirming Friday 10am — yes or no?" That is the whole email.</div></div>
+    <div class="er"><div class="ei">💪</div><div><strong>Be assertive and direct.</strong> Do not hedge. Do not say "I was wondering if maybe possibly…" Say "I recommend declining this request — here is why." Executives at this level respect people who speak clearly and own their recommendations.</div></div>
+    <div class="er"><div class="ei">🗣</div><div><strong>Use templated, professional language to protect the executive.</strong> For meeting declines: "Thank you for reaching out. [Executive's name] is fully committed this month but I will follow up when availability opens in [timeframe]." Warm, professional, and final.</div></div>
+    <div class="er"><div class="ei">📚</div><div><strong>Learn how your executive communicates and match it.</strong> Some want a daily brief. Others want to hear only when something is urgent. Some prefer voice messages. Others want bullet points. Adapt quickly to how they work — not how you prefer to work.</div></div>
+  </div>
+</div>
+<div class="ls">
+  <div class="lsey">Let's apply it</div>
+  <div class="lstitle">How would a Blueprint EA handle this?</div>
+  <div class="scene">
+    <div class="slabel">📋 Scenario</div>
+    <div class="stxt">You support <strong>CEO Priya Nair</strong>. A senior director from another department sends an email requesting a 1-hour alignment meeting with Priya next week.<br><br>You know Priya has a major investor presentation in four days. She is in final preparation mode. She has explicitly asked for minimal interruptions this week.</div>
+  </div>
+  <div class="slist">
+    <div class="si"><div class="sn">1</div><div class="st"><strong>Do not reply immediately with a yes or no.</strong> You need to understand the request before committing Priya's time.</div></div>
+    <div class="si"><div class="sn">2</div><div class="st"><strong>Evaluate against Priya's current priorities.</strong> Is this alignment meeting urgent before the investor presentation — or can it wait two weeks without any real impact? Ask yourself: what would Priya want?</div></div>
+    <div class="si"><div class="sn">3</div><div class="st"><strong>Prepare a one-paragraph brief for Priya.</strong> "Director [Name] has requested a 1-hour alignment meeting next week. Given your investor prep, I recommend proposing [date two weeks out] instead. Should I proceed with that?" One decision point. All context included.</div></div>
+    <div class="si"><div class="sn">4</div><div class="st"><strong>Respond to the director professionally while you wait.</strong> "Thank you for reaching out — Priya is in a high-priority preparation period this week. I am coordinating her schedule and will follow up shortly with a proposed time." Buys time without being evasive.</div></div>
+  </div>
+  <div class="co cb">💡 Notice what happened: you protected Priya's time, kept the director informed, and brought Priya a clear recommendation — not a problem. That is Blueprint-level EA thinking.</div>
+</div>`},
+
+{type:"quiz",qn:1,q:"A senior director requests 1 hour with the CEO next week. The CEO is in final investor presentation prep and has asked for minimal interruptions. What is the best action?",
+opts:["Book the hour — the director is senior and should not be made to wait","Decline the request without telling the CEO","Check the CEO's priorities, prepare a brief with your recommendation, and propose an alternative time to the director","Forward the email to the CEO and ask them to handle it directly"],
+c:2,ok:"✅ Perfect. You evaluate the request against the CEO's real priorities, propose an alternative, brief the CEO with your recommendation, and handle the external communication professionally. That is the full Blueprint response.",bad:"❌ Booking without thinking or ignoring the request entirely are both wrong. The right move is to evaluate, recommend, protect the CEO's time, and communicate professionally with the requestor — all in one smooth process."},
+
+{type:"quiz",qn:2,q:"During a leadership meeting, the CEO mentions the company is exploring a significant acquisition. This is clearly confidential. What do you do?",
+opts:["Tell your closest colleague at work — they are trustworthy and would keep it private","Post something vague on social media to signal you are in the loop on big things","Keep it strictly confidential — this information does not leave the room under any circumstances","Ask the CEO if you can mention it to the wider team to build excitement"],
+c:2,ok:"✅ Correct. Absolute discretion is non-negotiable at the C-Level. Confidential information stays confidential — with no exceptions for people you trust, no exceptions for vague hints online. This is the foundation of the trust relationship.",bad:"❌ This is a critical breach of professional trust. Confidential business information — especially about acquisitions, financials, or leadership decisions — must never be shared. An EA who breaks this trust will lose it permanently — and likely their position with it."}
+]}
+];
+
+// FINAL QUESTIONS
+var fqs=[
+  {q:"What is the core purpose of an Executive Assistant?",opts:["Answering calls, booking meetings, and managing office supplies","Managing the executive's time, information, and priorities so they can focus on leadership","Running marketing campaigns and managing the company's brand","Providing IT support and managing the company's software systems"],ans:1},
+  {q:"A great EA can recover how many hours per week for their executive?",opts:["1–2 hours","3–4 hours","5–10 hours","20+ hours"],ans:2},
+  {q:"Which of these is NOT one of the three core EA responsibility areas?",opts:["Time Orchestration","Communication Command","Financial Reporting","Logistics and Projects"],ans:2},
+  {q:"Why is buffer time between meetings so important?",opts:["It makes the calendar look less intimidating","It gives the executive time to breathe, take notes, and mentally prepare for the next meeting","It allows the EA to rest between tasks","It is required by most company meeting policies"],ans:1},
+  {q:"Alex needs to do a school pickup at 4:30pm every day. What should their EA protect?",opts:["Hope that all meetings end on time naturally","Ask Alex to arrange alternative pickup on busy days","Ensure all meetings are scheduled to end no later than 4:15pm","Move the pickup to a later time in the evening"],ans:2},
+  {q:"An email from a software company's promotional newsletter arrives in the executive's inbox. What should you do?",opts:["Forward it to the executive — they might find a useful tool","Leave it unread for the executive to deal with later","Auto-archive or delete it immediately — it should never reach the executive's primary view","Reply to the sender asking if it is relevant to the company"],ans:2},
+  {q:"What is the main purpose of a Weekly Inbox Summary sent to the executive?",opts:["To prove how much work the EA has done that week","To keep the executive informed about what was handled, escalated, and what needs their attention — without adding email volume","To forward all unread emails in one batch","To replace the daily briefing entirely"],ans:1},
+  {q:"What does 'having a strategic lens' mean for a C-Level EA?",opts:["Knowing how to use advanced calendar software","Understanding the company's goals, priorities, and key relationships so you can make informed decisions and filter accurately","Always being physically present in the office","Being available to the executive 24 hours a day, 7 days a week"],ans:1},
+  {q:"What does 'absolute discretion' mean in the EA context?",opts:["Being quiet and reserved in meetings","Never sharing confidential information with anyone who does not have a direct, authorized need to know it","Dressing conservatively and professionally at all times","Avoiding any direct communication with external parties"],ans:1},
+  {q:"Which phrase best signals that an EA is performing at the highest level?",opts:['"You always work so hard — thank you so much."','"I did not even have to think about it."','"You are always so quick to respond."','"You attend all of my meetings without fail."'],ans:1}
+];
+var fa=[],fq=0;
+
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function goHome(){show('sh')}
+
+function updateProgress(){
+  var n=done.filter(Boolean).length,p=n/4*100;
+  document.getElementById('np').style.width=p+'%';
+  document.getElementById('nl').textContent=n+'/4';
+  document.getElementById('hf').style.width=p+'%';
+  document.getElementById('hc').textContent=n+' of 4 modules complete';
+  for(var i=0;i<4;i++){
+    var c=document.getElementById('mc-'+i),s=document.getElementById('ms-'+i);
+    if(done[i]){c.classList.remove('locked');c.classList.add('done');s.textContent='✓'}
+    else if(i===0||done[i-1]){c.classList.remove('locked');if(!done[i])s.textContent='→'}
+  }
+  if(n===4){document.getElementById('fl').style.display='none';document.getElementById('fob').style.display='block'}
+}
+
+function startMod(idx){
+  if(document.getElementById('mc-'+idx).classList.contains('locked'))return;
+  cm=idx;cs=0;qa={};renderLesson();show('sl');
+}
+
+function renderLesson(){
+  var mod=mods[cm],step=mod.steps[cs],total=mod.steps.length;
+  document.getElementById('bt').textContent=mod.title;
+  document.getElementById('bb').textContent=mod.badge;
+  document.getElementById('bb').style.cssText=mod.bs;
+  var d='';for(var i=0;i<total;i++)d+='<div class="sd'+(i<cs?' done':i===cs?' active':'')+'"></div>';
+  document.getElementById('sd').innerHTML=d;
+  document.getElementById('si').textContent='Step '+(cs+1)+' of '+total;
+  var h='';
+  if(step.type==='lesson'){
+    h=step.html;
+    var last=cs===total-1;
+    h+='<div class="navbtns"><button class="btnp" onclick="'+(last?'completeMod()':'nextStep()')+'">'+( last?'Complete Module ✓':'Next →')+'</button></div>';
+  }else{
+    var ans=qa[cs];
+    h='<div class="qcard"><div class="qnum">Quiz — Question '+step.qn+' of 2</div><div class="qq">'+step.q+'</div><div class="qopts">';
+    for(var j=0;j<step.opts.length;j++){
+      var cl='qo'+(ans!==undefined?(j===step.c?' correct':(j===ans?' wrong':'')):'');
+      h+='<button class="'+cl+'" '+(ans!==undefined?'disabled':'')+' onclick="ansQ('+j+')">'+step.opts[j]+'</button>';
+    }
+    h+='</div>';
+    var last2=cs===total-1;
+    h+='<div class="qfb'+(ans!==undefined?' show '+(ans===step.c?'ok':'bad'):'')+'">'+( ans!==undefined?(ans===step.c?step.ok:step.bad):'')+'</div>';
+    h+='<div class="navbtns"><button class="btnp" id="qnb" '+(ans!==undefined?'':'disabled')+' onclick="'+(last2?'completeMod()':'nextStep()')+'">'+( last2?'Complete Module ✓':'Next →')+'</button></div></div>';
+  }
+  document.getElementById('lb').innerHTML=h;window.scrollTo(0,0);
+}
+
+function ansQ(idx){
+  var step=mods[cm].steps[cs];qa[cs]=idx;
+  var opts=document.querySelectorAll('.qo');
+  opts.forEach(function(b){b.disabled=true});
+  if(idx===step.c)opts[idx].classList.add('correct');
+  else{opts[idx].classList.add('wrong');opts[step.c].classList.add('reveal');}
+  var fb=document.querySelector('.qfb');
+  fb.textContent=idx===step.c?step.ok:step.bad;
+  fb.className='qfb show '+(idx===step.c?'ok':'bad');
+  document.getElementById('qnb').disabled=false;
+}
+
+function nextStep(){cs++;renderLesson();window.scrollTo(0,0)}
+function completeMod(){done[cm]=true;updateProgress();goHome()}
+
+function startFinal(){fa=[];fq=0;show('sf');renderFQ()}
+
+function renderFQ(){
+  if(fq>=fqs.length){showResults();return}
+  var q=fqs[fq],pct=Math.round(fq/fqs.length*100);
+  document.getElementById('fb2').textContent='Q '+(fq+1)+' of '+fqs.length;
+  var h='<div class="fhero"><div class="fhlabel">Final Assessment</div>';
+  h+='<div class="fhtitle">Question '+(fq+1)+' of '+fqs.length+'</div>';
+  h+='<div class="fhsub" style="margin-top:8px"><div style="background:var(--bg3);height:4px;border-radius:2px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:var(--amber);border-radius:2px;transition:width .4s;"></div></div></div>';
+  h+='</div><div style="padding:16px"><div class="qcard"><div class="qnum">Question '+(fq+1)+'</div><div class="qq">'+q.q+'</div><div class="qopts">';
+  for(var i=0;i<q.opts.length;i++)h+='<button class="qo" onclick="ansF('+i+')">'+q.opts[i]+'</button>';
+  h+='</div><div class="qfb" id="ffb"></div>';
+  h+='<div class="navbtns"><button class="btnp" id="fnb" disabled onclick="nextFQ()">'+( fq===fqs.length-1?'See Results →':'Next →')+'</button></div></div></div>';
+  document.getElementById('finalbody').innerHTML=h;window.scrollTo(0,0);
+}
+
+function ansF(idx){
+  var q=fqs[fq],correct=idx===q.ans;fa.push(correct);
+  var opts=document.querySelectorAll('.qo');
+  opts.forEach(function(b){b.disabled=true});
+  if(correct)opts[idx].classList.add('correct');
+  else{opts[idx].classList.add('wrong');opts[q.ans].classList.add('reveal');}
+  var fb=document.getElementById('ffb');
+  fb.textContent=correct?'✅ Correct!':'❌ The correct answer was: '+q.opts[q.ans];
+  fb.className='qfb show '+(correct?'ok':'bad');
+  document.getElementById('fnb').disabled=false;
+}
+
+function nextFQ(){fq++;renderFQ()}
+
+function showResults(){
+  var score=fa.filter(Boolean).length,pct=Math.round(score/fqs.length*100),pass=pct>=70;
+  var h='<div class="rcard"><div class="sring '+(pass?'pass':'fail')+'">';
+  h+='<div class="snum '+(pass?'pass':'fail')+'">'+pct+'%</div>';
+  h+='<div class="stag '+(pass?'pass':'fail')+'">'+(pass?'PASSED':'NOT YET')+'</div></div>';
+  h+='<div class="rtitle">'+(pass?'Blueprint Complete 🎉':'Keep Building 💪')+'</div>';
+  h+='<div class="rsub">'+(pass?'You have completed The EA Blueprint by GB. You now have the knowledge, vocabulary, and mindset to start supporting executives with confidence.':'You scored '+score+' out of '+fqs.length+'. The passing mark is 70%. Review the modules and try again — the knowledge is in there.')+'</div>';
+  h+='<div class="rgrid">';
+  h+='<div class="rstat"><div class="rstatl">Score</div><div class="rstatv">'+score+'/'+fqs.length+'</div></div>';
+  h+='<div class="rstat"><div class="rstatl">Percentage</div><div class="rstatv">'+pct+'%</div></div>';
+  h+='<div class="rstat"><div class="rstatl">Passing mark</div><div class="rstatv">70%</div></div>';
+  h+='<div class="rstat"><div class="rstatl">Result</div><div class="rstatv">'+(pass?'✅ Pass':'❌ Retry')+'</div></div>';
+  h+='</div>';
+  if(!pass)h+='<button class="fcbtn" onclick="startFinal()" style="margin-bottom:10px">Retry Assessment →</button>';
+  h+='<button class="bbtn" style="width:100%;padding:10px;text-align:center" onclick="goHome()">← Back to Home</button></div>';
+  if(pass)h+='<div class="cert"><h3>🏆 The EA Blueprint by GB — Foundation Certificate</h3><p>This certifies a foundational understanding of executive support: the EA role, calendar management, inbox management, and C-Level client support. You are Blueprint-ready.</p></div>';
+  document.getElementById('finalbody').innerHTML=h;window.scrollTo(0,0);
+}
+
+updateProgress();
+</script>
+</body>
+</html>
