@@ -301,7 +301,7 @@
       <div class="gate-benefit"><div class="gate-benefit-icon">🤖</div><div><strong>AI Integration course</strong> — the highest-paying niche</div></div>
     </div>
     <div class="gate-error" id="gate-error">Please enter a valid name and email address.</div>
-    <div class="gate-success" id="gate-success">
+    <div class="gate-success" id="gate-success" style="display:none">
       <h3>✅ You're in! Welcome.</h3>
       <p>Check your email for a confirmation from us. Your access to The EA Blueprint by GB is now unlocked.</p>
       <button class="gate-submit" onclick="enterAcademy()">Enter the Academy →</button>
@@ -768,41 +768,44 @@ function showResults(){
 
 
 // ─── EMAIL GATE ───────────────────────────────────────────────────────
-var MAILCHIMP_URL = 'https://ginobondoc.us21.list-manage.com/subscribe/post';
-
 function submitGate(){
   var name = document.getElementById('gate-name').value.trim();
   var email = document.getElementById('gate-email').value.trim();
   var errEl = document.getElementById('gate-error');
   var btn = document.getElementById('gate-btn');
 
-  // Basic validation
-  if(!name || !email || !email.includes('@') || !email.includes('.')){
+  // Validate
+  if(!name || name.length < 2){
+    errEl.textContent = 'Please enter your first name.';
+    errEl.classList.add('show');
+    return;
+  }
+  if(!email || !email.includes('@') || !email.includes('.')){
+    errEl.textContent = 'Please enter a valid email address.';
     errEl.classList.add('show');
     return;
   }
   errEl.classList.remove('show');
   btn.disabled = true;
-  btn.textContent = 'Submitting...';
+  btn.textContent = 'Unlocking access...';
 
   // Track with GA
   if(typeof gtag !== 'undefined'){
     gtag('event','gate_submit',{event_category:'Email Gate',event_label:email});
   }
 
-  // Open Mailchimp hosted form in background to register the email
-  // This is the most reliable method for static GitHub Pages sites
-  var mcUrl = 'http://eepurl.com/iJv56eaaD_';
-  // Store email for welcome purposes
-  try{ localStorage.setItem('gb_gate_email', email); }catch(e){}
+  // Store locally
+  try{
+    localStorage.setItem('gb_gate_passed','1');
+    localStorage.setItem('gb_gate_name', name);
+    localStorage.setItem('gb_gate_email', email);
+  }catch(e){}
 
   // Show success after short delay
   setTimeout(function(){
     document.getElementById('gate-form-wrap').style.display = 'none';
     document.getElementById('gate-success').classList.add('show');
-    // Store in localStorage so they don't see gate again
-    try{ localStorage.setItem('gb_gate_passed','1'); localStorage.setItem('gb_gate_name', name); }catch(e){}
-  }, 800);
+  }, 600);
 }
 
 function enterAcademy(){
