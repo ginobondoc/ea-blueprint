@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-09LRGXDPBG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-09LRGXDPBG');
+</script>
+<!-- End Google Analytics -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Freelance Blueprint by GB</title>
 <style>
   :root{
-    --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
-    --border:#30363d;--border2:#444c56;
-    --green:#2ea043;--green2:#3fb950;--gbg:rgba(46,160,67,.12);
+    --bg:#0d1117;--bg2:#141a14;--bg3:#1a241a;
+    --border:#2a3a2a;--border2:#3a4a3a;
+    --gold:#c9a84c;--gold2:#e2c06a;--goldbg:rgba(201,168,76,.12);--goldbg2:rgba(201,168,76,.20);
+    --green:#2ea043;--green2:#3fb950;--gbg:rgba(46,160,67,.10);
     --blue:#58a6ff;--bbg:rgba(88,166,255,.10);
     --amber:#d29922;--abg:rgba(210,153,34,.12);
     --red:#f85149;--rbg:rgba(248,81,73,.12);
@@ -16,8 +27,9 @@
     --pink:#f778ba;--pinkbg:rgba(247,120,186,.10);
     --teal:#39c5cf;--tealbg:rgba(57,197,207,.10);
     --orange:#e3853d;--orangebg:rgba(227,133,61,.10);
-    --text:#e6edf3;--text2:#8b949e;--text3:#6e7681;--white:#fff;
+    --text:#e8ede8;--text2:#9aaa9a;--text3:#6a7a6a;--white:#f5f0e8;
     --rsm:6px;--rmd:8px;--rlg:12px;
+    --serif:'Georgia','Times New Roman',serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -27,19 +39,19 @@
 
   .tnav{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
   .nlogo{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px;cursor:pointer}
-  .ndot{width:7px;height:7px;border-radius:50%;background:var(--green2)}
+  .ndot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
   .nby{color:var(--text3);font-weight:400;font-size:12px;margin-left:4px}
   .nright{display:flex;align-items:center;gap:10px}
   .npbar{width:64px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-  .npfill{height:100%;background:var(--green2);border-radius:2px;transition:width .5s ease}
+  .npfill{height:100%;background:var(--gold);border-radius:2px;transition:width .5s ease}
   .nlabel{font-size:12px;color:var(--text3)}
 
   /* HOME HERO */
   .hhero{padding:44px 24px 30px;border-bottom:1px solid var(--border)}
-  .heyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--green2);margin-bottom:14px}
-  .hedot{width:5px;height:5px;border-radius:50%;background:var(--green2)}
-  .hh1{font-size:27px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:10px;letter-spacing:-.4px}
-  .hh1 em{color:var(--green2);font-style:normal}
+  .heyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .hedot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .hh1{font-size:27px;font-weight:700;color:var(--white);line-height:1.25;margin-bottom:10px;letter-spacing:-.4px;font-family:var(--serif)}
+  .hh1 em{color:var(--gold);font-style:normal}
   .hsub{font-size:14px;color:var(--text2);line-height:1.75;max-width:500px;margin-bottom:18px}
   .htags{display:flex;flex-wrap:wrap;gap:7px}
   .htag{font-size:12px;padding:3px 9px;border-radius:var(--rsm);border:1px solid var(--border);color:var(--text2);background:var(--bg2)}
@@ -47,11 +59,11 @@
   .hby span{color:var(--green2);font-weight:600}
 
   /* DIAGNOSTIC CTA */
-  .diag-cta{margin:18px 16px;background:linear-gradient(135deg,rgba(46,160,67,.15),rgba(88,166,255,.10));border:1px solid var(--border2);border-radius:var(--rlg);padding:20px}
-  .diag-cta h3{font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
+  .diag-cta{margin:18px 16px;background:linear-gradient(135deg,rgba(201,168,76,.10),rgba(201,168,76,.04));border:1px solid rgba(201,168,76,.3);border-radius:var(--rlg);padding:20px}
+  .diag-cta h3{font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;font-family:var(--serif)}
   .diag-cta p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:14px}
-  .diag-btn{width:100%;background:var(--green);border:1px solid var(--green2);border-radius:var(--rmd);padding:13px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;transition:background .2s}
-  .diag-btn:hover{background:var(--green2)}
+  .diag-btn{width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:13px;font-size:14px;font-weight:600;color:#1a1200;cursor:pointer;transition:background .2s}
+  .diag-btn:hover{background:var(--gold2)}
   .diag-retake{background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;text-decoration:underline;margin-top:10px;display:block;width:100%;text-align:center}
 
   .psec{padding:16px 24px;border-bottom:1px solid var(--border)}
@@ -59,26 +71,26 @@
   .ptitle{font-size:13px;font-weight:600;color:var(--text)}
   .pcnt{font-size:12px;color:var(--text3)}
   .pbar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
-  .pfill{height:100%;background:var(--green2);border-radius:3px;transition:width .5s ease}
+  .pfill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s ease}
 
   .mslabel{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);padding:18px 24px 8px;display:flex;justify-content:space-between;align-items:center}
   .mlist{padding:0 16px;display:flex;flex-direction:column;gap:8px}
   .ccard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
   .ccard:hover{border-color:var(--border2);background:var(--bg3)}
-  .ccard.recommended{border-color:var(--green2);background:var(--gbg)}
+  .ccard.recommended{border-color:var(--gold);background:var(--goldbg)}
   .cicon{width:46px;height:46px;border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;border:1px solid var(--border)}
   .cinfo{flex:1;min-width:0}
   .clevel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
   .cl-beginner{color:var(--green2)}.cl-inter{color:var(--amber)}.cl-adv{color:var(--pink)}
-  .cname{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .cname{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;font-family:var(--serif)}
   .cdesc{font-size:12px;color:var(--text3);line-height:1.45}
   .cmeta{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
   .cmeta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:3px}
   .cprog{font-size:14px;flex-shrink:0;color:var(--text3)}
   .ccard.done-course .cprog{color:var(--green2)}
-  .rec-badge{position:absolute;top:-9px;left:14px;background:var(--green2);color:#06240f;font-size:10px;font-weight:700;padding:2px 9px;border-radius:10px;letter-spacing:.3px}
+  .rec-badge{position:absolute;top:-9px;left:14px;background:var(--gold);color:#1a1200;font-size:10px;font-weight:700;padding:2px 9px;border-radius:10px;letter-spacing:.3px}
   .cbar-mini{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:7px}
-  .cbar-mini-fill{height:100%;background:var(--green2);border-radius:2px;transition:width .4s}
+  .cbar-mini-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s}
 
   /* LESSON BAR */
   .lbar{background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;backdrop-filter:blur(10px)}
@@ -90,42 +102,42 @@
   /* MODULE LIST WITHIN COURSE */
   .modlist{padding:18px 16px}
   .modhdr{margin-bottom:16px}
-  .modhdr h2{font-size:20px;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:-.3px}
+  .modhdr h2{font-size:20px;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:-.3px;font-family:var(--serif)}
   .modhdr p{font-size:13px;color:var(--text2);line-height:1.6}
   .mcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:8px}
   .mcard:hover:not(.locked){border-color:var(--border2);background:var(--bg3)}
   .mcard.locked{opacity:.4;cursor:not-allowed}
-  .mcard.done{border-color:var(--green);background:var(--gbg)}
+  .mcard.done{border-color:var(--gold);background:var(--goldbg)}
   .micon{width:40px;height:40px;border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--border)}
   .minfo{flex:1;min-width:0}
   .mnum{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:2px}
-  .mname{font-size:14px;font-weight:600;color:var(--text);margin-bottom:1px}
+  .mname{font-size:14px;font-weight:600;color:var(--text);margin-bottom:1px;font-family:var(--serif)}
   .mdesc{font-size:12px;color:var(--text3)}
   .mstat{font-size:15px;flex-shrink:0;color:var(--text3)}
-  .mcard.done .mstat{color:var(--green2)}
+  .mcard.done .mstat{color:var(--gold)}
   .cfinal-wrap{margin-top:12px}
   .cfinal-locked{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:13px 16px;text-align:center;font-size:13px;color:var(--text3)}
-  .cfinal-btn{width:100%;background:var(--green);border:1px solid var(--green2);border-radius:var(--rlg);padding:13px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;transition:background .2s}
-  .cfinal-btn:hover{background:var(--green2)}
+  .cfinal-btn{width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rlg);padding:13px;font-size:14px;font-weight:600;color:#1a1200;cursor:pointer;transition:background .2s}
+  .cfinal-btn:hover{background:var(--gold2)}
 
   /* STEP TRACK */
   .strk{padding:9px 16px 7px;border-bottom:1px solid var(--border);background:var(--bg2)}
   .sdots{display:flex;gap:5px;margin-bottom:3px}
   .sd{flex:1;height:3px;border-radius:2px;background:var(--bg3);transition:background .3s}
-  .sd.active{background:var(--blue)}.sd.done{background:var(--green2)}
+  .sd.active{background:var(--gold)}.sd.done{background:var(--green2)}
   .sinfo{font-size:11px;color:var(--text3)}
 
   .lbody{padding:18px 16px}
   .ls{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:20px;margin-bottom:11px}
   .lsey{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:5px}
-  .lstitle{font-size:16px;font-weight:700;color:var(--white);margin-bottom:11px;line-height:1.35;letter-spacing:-.2px}
+  .lstitle{font-size:16px;font-weight:700;color:var(--white);margin-bottom:11px;line-height:1.35;letter-spacing:-.2px;font-family:var(--serif)}
   .lstxt{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:9px}
   .lstxt:last-child{margin-bottom:0}
   .lstxt strong{color:var(--text);font-weight:600}
 
   .co{border-radius:var(--rmd);padding:11px 13px;margin:9px 0;font-size:13px;line-height:1.65;font-weight:500}
   .co strong{font-weight:700}
-  .cg{background:var(--gbg);border:1px solid rgba(46,160,67,.3);color:#7ee787}
+  .cg{background:var(--goldbg);border:1px solid rgba(201,168,76,.3);color:var(--gold2)}
   .cb{background:var(--bbg);border:1px solid rgba(88,166,255,.25);color:#79c0ff}
   .ca{background:var(--abg);border:1px solid rgba(210,153,34,.3);color:#e3b341}
   .cr{background:var(--rbg);border:1px solid rgba(248,81,73,.3);color:#ffa198}
@@ -143,7 +155,7 @@
 
   .slist{margin:9px 0}
   .si{display:flex;gap:9px;margin-bottom:8px;align-items:flex-start}
-  .sn{width:23px;height:23px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .sn{width:23px;height:23px;border-radius:50%;background:var(--gold);color:#1a1200;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
   .st{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
   .st strong{color:var(--text);font-weight:600}
 
@@ -168,7 +180,7 @@
 
   .qcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:19px;margin-bottom:11px}
   .qnum{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin-bottom:5px}
-  .qq{font-size:15px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:13px}
+  .qq{font-size:15px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:13px;font-family:var(--serif)}
   .qopts{display:flex;flex-direction:column;gap:7px}
   .qo{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rmd);padding:10px 12px;font-size:13px;color:var(--text2);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
   .qo:hover:not(:disabled){border-color:var(--border2);color:var(--text)}
@@ -181,8 +193,8 @@
   .qfb.bad{background:var(--rbg);border:1px solid rgba(248,81,73,.3);color:#ffa198}
 
   .navbtns{display:flex;justify-content:flex-end;margin-top:13px}
-  .btnp{background:var(--green);border:1px solid var(--green2);border-radius:var(--rmd);padding:9px 19px;font-size:13px;font-weight:600;color:var(--white);cursor:pointer;transition:background .15s}
-  .btnp:hover{background:var(--green2)}
+  .btnp{background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:9px 19px;font-size:13px;font-weight:600;color:#1a1200;cursor:pointer;transition:background .15s}
+  .btnp:hover{background:var(--gold2)}
   .btnp:disabled{background:var(--bg3);border-color:var(--border);color:var(--text3);cursor:not-allowed}
 
   /* DIAGNOSTIC */
@@ -192,42 +204,75 @@
   .dhsub{font-size:13px;color:var(--text2)}
   .dq-opts{display:flex;flex-direction:column;gap:8px}
   .dq-opt{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rmd);padding:13px 15px;font-size:14px;color:var(--text2);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
-  .dq-opt:hover{border-color:var(--blue);color:var(--text);background:var(--bbg)}
-  .dq-opt.selected{border-color:var(--blue);background:var(--bbg);color:#79c0ff;font-weight:500}
+  .dq-opt:hover{border-color:var(--gold);color:var(--text);background:var(--goldbg)}
+  .dq-opt.selected{border-color:var(--gold);background:var(--goldbg);color:var(--gold2);font-weight:500}
 
   /* RESULTS */
   .rcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:22px;margin:14px 16px 11px;text-align:center}
   .sring{width:90px;height:90px;border-radius:50%;margin:0 auto 13px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:3px solid}
-  .sring.pass{border-color:var(--green2);background:var(--gbg)}
+  .sring.pass{border-color:var(--gold);background:var(--goldbg)}
   .sring.fail{border-color:var(--red);background:var(--rbg)}
   .snum{font-size:24px;font-weight:700;line-height:1}
-  .snum.pass{color:#7ee787}.snum.fail{color:#ffa198}
+  .snum.pass{color:var(--gold2)}.snum.fail{color:#ffa198}
   .stag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-  .stag.pass{color:var(--green2)}.stag.fail{color:var(--red)}
+  .stag.pass{color:var(--gold)}.stag.fail{color:var(--red)}
   .rtitle{font-size:17px;font-weight:700;color:var(--white);margin-bottom:5px}
   .rsub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:14px}
   .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
   .rstat{background:var(--bg3);border-radius:var(--rmd);padding:10px;text-align:left}
   .rstatl{font-size:11px;color:var(--text3);margin-bottom:3px}
   .rstatv{font-size:17px;font-weight:700;color:var(--text)}
-  .cert{background:var(--gbg);border:1px solid rgba(46,160,67,.3);border-radius:var(--rlg);padding:15px;margin:0 16px 14px;text-align:center}
-  .cert h3{font-size:13px;font-weight:600;color:#7ee787;margin-bottom:4px}
-  .cert p{font-size:12px;color:rgba(126,231,135,.75);line-height:1.5}
+  .cert{background:var(--goldbg);border:1px solid rgba(201,168,76,.3);border-radius:var(--rlg);padding:15px;margin:0 16px 14px;text-align:center}
+  .cert h3{font-size:13px;font-weight:600;color:var(--gold2);margin-bottom:4px;font-family:var(--serif)}
+  .cert p{font-size:12px;color:rgba(226,192,106,.75);line-height:1.5}
 
   /* DIAGNOSTIC RESULT */
-  .drec{background:linear-gradient(135deg,rgba(46,160,67,.15),rgba(88,166,255,.10));border:1px solid var(--green2);border-radius:var(--rlg);padding:22px;margin:16px;text-align:center}
-  .drec-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--green2);margin-bottom:10px}
+  .drec{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.06));border:1px solid var(--gold);border-radius:var(--rlg);padding:22px;margin:16px;text-align:center}
+  .drec-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:10px}
   .drec-icon{font-size:40px;margin-bottom:10px}
-  .drec h2{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-.3px}
+  .drec h2{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-.3px;font-family:var(--serif)}
   .drec p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px}
-  .drec-btn{width:100%;background:var(--green);border:1px solid var(--green2);border-radius:var(--rmd);padding:13px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;margin-bottom:8px}
-  .drec-btn:hover{background:var(--green2)}
+  .drec-btn{width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:13px;font-size:14px;font-weight:600;color:var(--white);cursor:pointer;margin-bottom:8px}
+  .drec-btn:hover{background:var(--gold2)}
   .drec-browse{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer}
   .drec-browse:hover{border-color:var(--border2);color:var(--text)}
   .drunner{margin:0 16px 16px}
-  .drunner-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin-bottom:8px;padding-left:4px}
+  .drunner-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);margin-bottom:8px;padding-left:4px}
 
   @media(max-width:480px){.ig,.rgrid{grid-template-columns:1fr}.hh1{font-size:22px}.lstitle{font-size:14px}}
+
+  /* EMAIL GATE */
+  #sg{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .gate-wrap{max-width:440px;width:100%;text-align:center}
+  .gate-logo{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:32px}
+  .gate-logo-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  .gate-logo-by{color:var(--text3);font-weight:400;font-size:12px;margin-left:2px}
+  .gate-icon{font-size:52px;margin-bottom:16px}
+  .gate-h1{font-size:24px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:10px;letter-spacing:-.4px;font-family:var(--serif)}
+  .gate-h1 em{color:var(--gold);font-style:normal}
+  .gate-sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:28px}
+  .gate-benefits{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:18px;margin-bottom:24px;text-align:left}
+  .gate-benefit{display:flex;align-items:flex-start;gap:10px;padding:6px 0;font-size:13px;color:var(--text2);line-height:1.5}
+  .gate-benefit:first-child{padding-top:0}
+  .gate-benefit:last-child{padding-bottom:0;border-bottom:none}
+  .gate-benefit-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+  .gate-benefit strong{color:var(--text)}
+  .gate-form{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+  .gate-input{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px 14px;font-size:14px;color:var(--text);width:100%;outline:none;transition:border-color .15s}
+  .gate-input:focus{border-color:var(--gold)}
+  .gate-input::placeholder{color:var(--text3)}
+  .gate-submit{background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:13px;font-size:15px;font-weight:600;color:#1a1200;cursor:pointer;width:100%;transition:background .15s}
+  .gate-submit:hover{background:var(--gold2)}
+  .gate-submit:disabled{background:var(--bg3);border-color:var(--border);color:var(--text3);cursor:not-allowed}
+  .gate-privacy{font-size:11px;color:var(--text3);line-height:1.5}
+  .gate-privacy a{color:var(--text3)}
+  .gate-error{background:var(--rbg);border:1px solid rgba(248,81,73,.3);border-radius:var(--rmd);padding:10px 12px;font-size:13px;color:#ffa198;display:none;margin-bottom:8px}
+  .gate-error.show{display:block}
+  .gate-success{background:var(--gbg);border:1px solid rgba(46,160,67,.3);border-radius:var(--rlg);padding:20px;margin-bottom:16px;display:none}
+  .gate-success.show{display:block}
+  .gate-success h3{font-size:16px;font-weight:700;color:var(--gold2);margin-bottom:6px;font-family:var(--serif)}
+  .gate-success p{font-size:13px;color:rgba(126,231,135,.8);line-height:1.6;margin-bottom:14px}
+
 </style>
 </head>
 <body>
@@ -241,21 +286,50 @@
 
 <div class="app">
 
-<!-- ════════ HOME / ACADEMY HUB ════════ -->
-<div id="sh" class="screen active">
-  <div class="hhero">
-    <div class="heyebrow"><span class="hedot"></span>Free Freelancing Academy</div>
-    <h1 class="hh1">Learn a real skill. Land real clients. Build a <em>freelancing career</em> from anywhere.</h1>
-    <p class="hsub">Built for complete beginners with zero experience. Take the quick assessment to find your best-fit path, or browse all courses freely. Every course is designed so anyone can follow along, step by step.</p>
-    <div class="htags">
-      <span class="htag">9 Courses</span><span class="htag">Free</span><span class="htag">Beginner Friendly</span><span class="htag">Self-Paced</span>
+
+<!-- ════════ EMAIL GATE ════════ -->
+<div id="sg" class="screen active">
+  <div class="gate-wrap">
+    <div class="gate-logo"><div class="gate-logo-dot"></div>The Freelance Blueprint <span class="gate-logo-by">by GB</span></div>
+    <div class="gate-icon">🎓</div>
+    <h1 class="gate-h1">Your step-by-step guide to a <em>real freelancing career</em></h1>
+    <p class="gate-sub">Enter your name and email to get instant access to all 9 courses — built for complete beginners, no experience needed.</p>
+    <div class="gate-benefits">
+      <div class="gate-benefit"><div class="gate-benefit-icon">🎯</div><div><strong>9 full courses</strong> covering every major VA niche</div></div>
+      <div class="gate-benefit"><div class="gate-benefit-icon">🧭</div><div><strong>Diagnostic assessment</strong> that finds your best-fit path</div></div>
+      <div class="gate-benefit"><div class="gate-benefit-icon">📊</div><div><strong>Quizzes and final assessments</strong> with certificates</div></div>
+      <div class="gate-benefit"><div class="gate-benefit-icon">🤖</div><div><strong>AI Integration course</strong> — the highest-paying niche</div></div>
     </div>
-    <div class="hby">Crafted by <span>Gino Bondoc</span> · Senior Team Lead &amp; L&amp;D Specialist</div>
+    <div class="gate-error" id="gate-error">Please enter a valid name and email address.</div>
+    <div class="gate-success" id="gate-success">
+      <h3>✅ You're in! Welcome.</h3>
+      <p>Check your email for a confirmation from us. Your access to The EA Blueprint by GB is now unlocked.</p>
+      <button class="gate-submit" onclick="enterAcademy()">Enter the Academy →</button>
+    </div>
+    <div class="gate-form" id="gate-form-wrap">
+      <input class="gate-input" type="text" id="gate-name" placeholder="Your first name" autocomplete="given-name">
+      <input class="gate-input" type="email" id="gate-email" placeholder="Your email address" autocomplete="email">
+      <button class="gate-submit" id="gate-btn" onclick="submitGate()">Get Instant Access →</button>
+    </div>
+    <p class="gate-privacy">By entering, you agree to receive occasional updates from Gino Bondoc. No spam, ever. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- ════════ HOME / ACADEMY HUB ════════ -->
+<div id="sh" class="screen">
+  <div class="hhero">
+    <div class="heyebrow"><span class="hedot"></span>Freelancing Academy</div>
+    <h1 class="hh1">Learn a real skill. Land real clients. Build a <em>freelancing career</em> from anywhere.</h1>
+    <p class="hsub">Built for complete beginners with zero experience. Take the quick assessment to find your best-fit path, or browse all courses at your own pace. Every course is designed so anyone can follow along, step by step.</p>
+    <div class="htags">
+      <span class="htag">9 Courses</span><span class="htag">Beginner Friendly</span><span class="htag">Self-Paced</span>
+    </div>
+    <div class="hby">Crafted by <span>Gino Bondoc</span> · Senior Operations &amp; Client Partnership Leader</div>
   </div>
 
   <div class="diag-cta">
     <h3>🧭 Not sure where to start?</h3>
-    <p>Answer 8 quick questions about your interests and strengths. We'll recommend the freelancing path that fits you best — but you're always free to choose any course you like.</p>
+    <p>Answer 8 quick questions about your interests and strengths. We'll recommend the freelancing path that fits you best — but you're always welcome to choose any course you like.</p>
     <button class="diag-btn" onclick="startDiag()">Take the Quick Assessment →</button>
     <button class="diag-retake" id="diag-retake" onclick="startDiag()" style="display:none">Retake assessment</button>
   </div>
@@ -691,6 +765,65 @@ function showResults(){
   if(pass)h+='<div class="cert"><h3>🏆 '+meta.name+' — Certificate of Completion</h3><p>The Freelance Blueprint by GB · This certifies a foundational understanding of '+meta.name+'. You are ready to start applying these skills with real clients.</p></div>';
   document.getElementById('finalbody').innerHTML=h;window.scrollTo(0,0);
 }
+
+
+// ─── EMAIL GATE ───────────────────────────────────────────────────────
+var MAILCHIMP_URL = 'https://ginobondoc.us21.list-manage.com/subscribe/post';
+
+function submitGate(){
+  var name = document.getElementById('gate-name').value.trim();
+  var email = document.getElementById('gate-email').value.trim();
+  var errEl = document.getElementById('gate-error');
+  var btn = document.getElementById('gate-btn');
+
+  // Basic validation
+  if(!name || !email || !email.includes('@') || !email.includes('.')){
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  // Track with GA
+  if(typeof gtag !== 'undefined'){
+    gtag('event','gate_submit',{event_category:'Email Gate',event_label:email});
+  }
+
+  // Open Mailchimp hosted form in background to register the email
+  // This is the most reliable method for static GitHub Pages sites
+  var mcUrl = 'http://eepurl.com/iJv56eaaD_';
+  // Store email for welcome purposes
+  try{ localStorage.setItem('gb_gate_email', email); }catch(e){}
+
+  // Show success after short delay
+  setTimeout(function(){
+    document.getElementById('gate-form-wrap').style.display = 'none';
+    document.getElementById('gate-success').classList.add('show');
+    // Store in localStorage so they don't see gate again
+    try{ localStorage.setItem('gb_gate_passed','1'); localStorage.setItem('gb_gate_name', name); }catch(e){}
+  }, 800);
+}
+
+function enterAcademy(){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('sh').classList.add('active');
+  window.scrollTo(0,0);
+  if(typeof gtag !== 'undefined'){
+    gtag('event','academy_entered',{event_category:'Email Gate'});
+  }
+}
+
+// Check if already passed gate (returning visitor)
+(function(){
+  try{
+    if(localStorage.getItem('gb_gate_passed')==='1'){
+      document.getElementById('sg').classList.remove('active');
+      document.getElementById('sh').classList.add('active');
+    }
+  }catch(e){}
+})();
+// ─── END EMAIL GATE ────────────────────────────────────────────────────
 
 // ─── INIT ───
 initProgress();
