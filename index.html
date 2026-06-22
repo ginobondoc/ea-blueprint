@@ -242,7 +242,7 @@
   @media(max-width:480px){.ig,.rgrid{grid-template-columns:1fr}.hh1{font-size:22px}.lstitle{font-size:14px}}
 
   /* EMAIL GATE */
-  #sg{background:var(--bg);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  #sg{background:var(--bg);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:32px 24px;overflow-y:auto}
   .gate-wrap{max-width:440px;width:100%;text-align:center}
   .gate-logo{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:32px}
   .gate-logo-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
@@ -257,7 +257,7 @@
   .gate-benefit:last-child{padding-bottom:0;border-bottom:none}
   .gate-benefit-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
   .gate-benefit strong{color:var(--text)}
-  .gate-form{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+  .gate-form{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;width:100%}
   .gate-input{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px 14px;font-size:14px;color:var(--text);width:100%;outline:none;transition:border-color .15s}
   .gate-input:focus{border-color:var(--gold)}
   .gate-input::placeholder{color:var(--text3)}
@@ -289,29 +289,42 @@
 
 <!-- ════════ EMAIL GATE ════════ -->
 <div id="sg" class="screen active">
-  <div class="gate-wrap">
-    <div class="gate-logo"><div class="gate-logo-dot"></div>The Freelance Blueprint <span class="gate-logo-by">by GB</span></div>
-    <div class="gate-icon">🎓</div>
-    <h1 class="gate-h1">Your step-by-step guide to a <em>real freelancing career</em></h1>
-    <p class="gate-sub">Enter your name and email to get instant access to all 9 courses — built for complete beginners, no experience needed.</p>
-    <div class="gate-benefits">
-      <div class="gate-benefit"><div class="gate-benefit-icon">🎯</div><div><strong>9 full courses</strong> covering every major VA niche</div></div>
-      <div class="gate-benefit"><div class="gate-benefit-icon">🧭</div><div><strong>Diagnostic assessment</strong> that finds your best-fit path</div></div>
-      <div class="gate-benefit"><div class="gate-benefit-icon">📊</div><div><strong>Quizzes and final assessments</strong> with certificates</div></div>
-      <div class="gate-benefit"><div class="gate-benefit-icon">🤖</div><div><strong>AI Integration course</strong> — the highest-paying niche</div></div>
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;background:var(--bg)">
+    <div style="max-width:440px;width:100%;text-align:center">
+      <div style="font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:28px">
+        <div style="width:7px;height:7px;border-radius:50%;background:var(--gold)"></div>
+        The Freelance Blueprint <span style="color:var(--text3);font-weight:400;font-size:12px;margin-left:2px">by GB</span>
+      </div>
+      <div style="font-size:48px;margin-bottom:14px">🎓</div>
+      <h1 style="font-size:24px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:10px;font-family:var(--serif)">
+        Your step-by-step guide to a <span style="color:var(--gold)">real freelancing career</span>
+      </h1>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px">
+        Enter your name and email to get instant access to all 9 courses — built for complete beginners, no experience needed.
+      </p>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:22px;text-align:left">
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;color:var(--text2)"><span style="font-size:16px">🎯</span><span><strong style="color:var(--text)">9 full courses</strong> covering every major VA niche</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;color:var(--text2)"><span style="font-size:16px">🧭</span><span><strong style="color:var(--text)">Diagnostic assessment</strong> that finds your best-fit path</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;color:var(--text2)"><span style="font-size:16px">📊</span><span><strong style="color:var(--text)">Quizzes and final assessments</strong> with certificates</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;color:var(--text2)"><span style="font-size:16px">🤖</span><span><strong style="color:var(--text)">AI Integration course</strong> — the highest-paying niche</span></div>
+      </div>
+      <div id="gate-error-msg" style="display:none;background:var(--rbg);border:1px solid rgba(248,81,73,.3);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:#ffa198"></div>
+      <div id="gate-success-msg" style="display:none;background:var(--goldbg);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:22px;margin-bottom:16px">
+        <div style="font-size:32px;margin-bottom:10px">🎉</div>
+        <h3 style="font-size:18px;font-weight:700;color:var(--gold2);margin-bottom:8px;font-family:var(--serif)">You're in! Welcome.</h3>
+        <p style="font-size:13px;color:rgba(226,192,106,.8);line-height:1.6;margin-bottom:16px">Your access to The Freelance Blueprint by GB is now unlocked.</p>
+        <button onclick="enterAcademy()" style="width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:8px;padding:16px;font-size:16px;font-weight:700;color:#1a1200;cursor:pointer">Enter the Academy →</button>
+      </div>
+      <div id="gate-form-wrap">
+        <input id="gate-name" type="text" placeholder="Your first name" autocomplete="given-name"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);margin-bottom:10px;outline:none;box-sizing:border-box">
+        <input id="gate-email" type="email" placeholder="Your email address" autocomplete="email"
+          style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);margin-bottom:10px;outline:none;box-sizing:border-box">
+        <button id="gate-btn" onclick="submitGate()"
+          style="width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:8px;padding:14px;font-size:15px;font-weight:700;color:#1a1200;cursor:pointer">Get Instant Access →</button>
+      </div>
+      <p style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:14px">By entering, you agree to receive occasional updates from Gino Bondoc. No spam, ever. Unsubscribe anytime.</p>
     </div>
-    <div class="gate-error" id="gate-error">Please enter a valid name and email address.</div>
-    <div class="gate-success" id="gate-success" style="display:none">
-      <h3>✅ You're in! Welcome.</h3>
-      <p>Check your email for a confirmation from us. Your access to The EA Blueprint by GB is now unlocked.</p>
-      <button class="gate-submit" onclick="enterAcademy()">Enter the Academy →</button>
-    </div>
-    <div class="gate-form" id="gate-form-wrap">
-      <input class="gate-input" type="text" id="gate-name" placeholder="Your first name" autocomplete="given-name">
-      <input class="gate-input" type="email" id="gate-email" placeholder="Your email address" autocomplete="email">
-      <button class="gate-submit" id="gate-btn" onclick="submitGate()">Get Instant Access →</button>
-    </div>
-    <p class="gate-privacy">By entering, you agree to receive occasional updates from Gino Bondoc. No spam, ever. Unsubscribe anytime.</p>
   </div>
 </div>
 
@@ -771,21 +784,21 @@ function showResults(){
 function submitGate(){
   var name = document.getElementById('gate-name').value.trim();
   var email = document.getElementById('gate-email').value.trim();
-  var errEl = document.getElementById('gate-error');
+  var errEl = document.getElementById('gate-error-msg');
   var btn = document.getElementById('gate-btn');
 
   // Validate
   if(!name || name.length < 2){
     errEl.textContent = 'Please enter your first name.';
-    errEl.classList.add('show');
+    errEl.style.display='block';
     return;
   }
   if(!email || !email.includes('@') || !email.includes('.')){
     errEl.textContent = 'Please enter a valid email address.';
-    errEl.classList.add('show');
+    errEl.style.display='block';
     return;
   }
-  errEl.classList.remove('show');
+  errEl.style.display='none';
   btn.disabled = true;
   btn.textContent = 'Unlocking access...';
 
@@ -804,7 +817,8 @@ function submitGate(){
   // Show success after short delay
   setTimeout(function(){
     document.getElementById('gate-form-wrap').style.display = 'none';
-    document.getElementById('gate-success').classList.add('show');
+    document.getElementById('gate-success-msg').style.display='block';
+    window.scrollTo(0,0);
   }, 600);
 }
 
