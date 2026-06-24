@@ -650,7 +650,7 @@ var raQuestions = [
 var raAnswers = {}, raQ = 0, raFlags = [], raReadyScore = 0;
 var assessmentPassed = false;
 
-try { assessmentPassed = localStorage.getItem('gb_ra_passed') === '1'; } catch(e){}
+try { assessmentPassed = lsGet('gb_ra_passed') === '1'; } catch(e){}
 
 // ─── COURSE METADATA ───────────────────────────────────────────────────────
 
@@ -810,7 +810,7 @@ function renderRAResult(){
   document.getElementById('ra-body').innerHTML=h;
   window.scrollTo({top:0,behavior:'instant'});
   // Save passed state
-  try{localStorage.setItem('gb_ra_passed','1');localStorage.setItem('gb_ra_rec',recommendedCourse);}catch(e){}
+  try{lsSet('gb_ra_passed','1');lsSet('gb_ra_rec',recommendedCourse);}catch(e){}
   assessmentPassed=true;
 }
 
@@ -861,7 +861,7 @@ function renderHome(){
   if(retakeBtn) retakeBtn.style.display=assessmentPassed?'inline':'none';
 
   // recommended runner
-  try{if(!recommendedCourse){var s=localStorage.getItem('gb_ra_rec');if(s)recommendedCourse=s;}}catch(e){}
+  try{if(!recommendedCourse){var s=lsGet('gb_ra_rec');if(s)recommendedCourse=s;}}catch(e){}
 
   // ── GROUPED TABLE LAYOUT ──
   var groups=[
@@ -1167,9 +1167,9 @@ function submitGate(){
 
   // Store locally
   try{
-    localStorage.setItem('gb_gate_passed','1');
-    localStorage.setItem('gb_gate_name', name);
-    localStorage.setItem('gb_gate_email', email);
+    lsSet('gb_gate_passed','1');
+    lsSet('gb_gate_name', name);
+    lsSet('gb_gate_email', email);
   }catch(e){}
 
   // Show success after short delay
@@ -1191,42 +1191,44 @@ function enterAcademy(){
   if(!assessmentPassed){
     show('sr');renderRAQ();
   } else {
-    try{var s=localStorage.getItem('gb_ra_rec');if(s)recommendedCourse=s;}catch(e){}
+    try{var s=lsGet('gb_ra_rec');if(s)recommendedCourse=s;}catch(e){}
     renderHome();show('sh');
   }
   window.scrollTo({top:0,behavior:'instant'});
 }
 
+// ─── INIT ───
+initProgress();
+
+// ─── Safe localStorage wrapper ───
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+
 // Check if already passed gate (returning visitor)
 (function(){
-  try{
-    if(localStorage.getItem('gb_gate_passed')==='1'){
-      document.getElementById('sg').style.display='none';
-      document.getElementById('main-ui').style.display='block';
-      if(localStorage.getItem('gb_ra_passed')==='1'){
-        assessmentPassed=true;
-        var saved=localStorage.getItem('gb_ra_rec');
-        if(saved) recommendedCourse=saved;
-        renderHome();document.getElementById('sh').classList.add('active');
-      } else {
-        show('sr');renderRAQ();
-      }
+  var gatePassed = lsGet('gb_gate_passed')==='1';
+  var raPassed   = lsGet('gb_ra_passed')==='1';
+  var raRec      = lsGet('gb_ra_rec');
+
+  if(gatePassed){
+    document.getElementById('sg').style.display='none';
+    document.getElementById('main-ui').style.display='block';
+    if(raPassed){
+      assessmentPassed=true;
+      if(raRec) recommendedCourse=raRec;
+      renderHome();
+      show('sh');
     } else {
-      document.getElementById('sg').style.display='flex';
-      document.getElementById('main-ui').style.display='none';
-      document.body.classList.add('gate-open');
+      show('sr');
+      renderRAQ();
     }
-  }catch(e){
+  } else {
     document.getElementById('sg').style.display='flex';
     document.getElementById('main-ui').style.display='none';
     document.body.classList.add('gate-open');
   }
 })();
 // ─── END EMAIL GATE ────────────────────────────────────────────────────
-
-// ─── INIT ───
-initProgress();
-renderHome();
 </script>
 </body>
 </html>
