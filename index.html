@@ -274,6 +274,82 @@
   .gate-success h3{font-size:16px;font-weight:700;color:var(--gold2);margin-bottom:6px;font-family:var(--serif)}
   .gate-success p{font-size:13px;color:rgba(126,231,135,.8);line-height:1.6;margin-bottom:14px}
 
+
+  /* ── READINESS ASSESSMENT ── */
+  #sr{display:none}
+  .ra-hero{padding:32px 32px 20px;border-bottom:1px solid var(--border)}
+  .ra-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+  .ra-title{font-size:21px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:6px;font-family:var(--serif)}
+  .ra-sub{font-size:13px;color:var(--text2);line-height:1.6}
+  .ra-progress{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:14px}
+  .ra-pfill{height:100%;background:var(--amber);border-radius:2px;transition:width .4s}
+
+  .ra-qwrap{padding:20px 24px}
+  .ra-qcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:20px;margin-bottom:11px}
+  .ra-qlabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--amber);margin-bottom:6px}
+  .ra-q{font-size:15px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:14px;font-family:var(--serif)}
+  .ra-opts{display:flex;flex-direction:column;gap:8px}
+  .ra-opt{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rmd);padding:11px 14px;font-size:13px;color:var(--text2);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+  .ra-opt:hover{border-color:var(--gold);color:var(--text);background:var(--goldbg)}
+  .ra-opt.selected{border-color:var(--gold);background:var(--goldbg);color:var(--gold2);font-weight:500}
+  .ra-hint{font-size:12px;color:var(--text3);margin-top:10px;line-height:1.5;font-style:italic}
+
+  .ra-nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px 20px}
+  .ra-back{background:none;border:1px solid var(--border);border-radius:var(--rmd);padding:8px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s}
+  .ra-back:hover{border-color:var(--border2);color:var(--text)}
+  .ra-next{background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:9px 20px;font-size:13px;font-weight:600;color:#1a1200;cursor:pointer;transition:background .15s}
+  .ra-next:hover{background:var(--gold2)}
+  .ra-next:disabled{background:var(--bg3);border-color:var(--border);color:var(--text3);cursor:not-allowed}
+
+  /* ── READINESS RESULTS ── */
+  .ra-result{padding:24px}
+  .ra-score-ring{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+  .ra-score-ring.ready{background:var(--goldbg);border:3px solid var(--gold)}
+  .ra-score-ring.almost{background:var(--abg);border:3px solid var(--amber)}
+  .ra-score-ring.prep{background:var(--rbg);border:3px solid var(--red)}
+  .ra-score-pct{font-size:26px;font-weight:700;line-height:1}
+  .ra-score-ring.ready .ra-score-pct{color:var(--gold2)}
+  .ra-score-ring.almost .ra-score-pct{color:#e3b341}
+  .ra-score-ring.prep .ra-score-pct{color:#ffa198}
+  .ra-score-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  .ra-score-ring.ready .ra-score-tag{color:var(--gold)}
+  .ra-score-ring.almost .ra-score-tag{color:var(--amber)}
+  .ra-score-ring.prep .ra-score-tag{color:var(--red)}
+  .ra-res-title{font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px;text-align:center;font-family:var(--serif)}
+  .ra-res-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:18px;text-align:center}
+  .ra-flags{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .ra-flag{display:flex;align-items:flex-start;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rmd);padding:11px 13px;font-size:13px;color:var(--text2);line-height:1.55}
+  .ra-flag-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+  .ra-flag strong{color:var(--text)}
+  .ra-cta-btn{width:100%;background:var(--gold);border:1px solid var(--gold2);border-radius:var(--rmd);padding:13px;font-size:14px;font-weight:600;color:#1a1200;cursor:pointer;transition:background .15s;margin-bottom:10px}
+  .ra-cta-btn:hover{background:var(--gold2)}
+  .ra-retake{background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;text-decoration:underline;display:block;width:100%;text-align:center;margin-top:6px}
+
+  /* ── COURSE TABLE LAYOUT ── */
+  .ctab-wrap{padding:0 24px 24px}
+  .ctab-group{margin-bottom:20px}
+  .ctab-group-header{display:flex;align-items:center;gap:10px;padding:10px 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px}
+  .ctab-group-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.7px}
+  .ctab-group-title.lvl-found{color:var(--green2)}
+  .ctab-group-title.lvl-beg{color:var(--blue)}
+  .ctab-group-title.lvl-inter{color:var(--amber)}
+  .ctab-group-title.lvl-adv{color:var(--pink)}
+  .ctab-group-count{font-size:11px;color:var(--text3);margin-left:auto}
+  .ctab-row{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rmd);padding:10px 13px;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:6px}
+  .ctab-row:hover{border-color:var(--border2);background:var(--bg3)}
+  .ctab-row.rec{border-color:var(--gold);background:var(--goldbg)}
+  .ctab-row.done{border-color:rgba(46,160,67,.4);background:var(--gbg)}
+  .ctab-icon{font-size:20px;text-align:center}
+  .ctab-info{}
+  .ctab-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;font-family:var(--serif);line-height:1.3}
+  .ctab-meta{font-size:11px;color:var(--text3);display:flex;gap:8px;flex-wrap:wrap}
+  .ctab-arrow{font-size:14px;color:var(--text3);flex-shrink:0}
+  .ctab-row.rec .ctab-arrow{color:var(--gold)}
+  .ctab-row.done .ctab-arrow{color:var(--green2)}
+  .ctab-pbar{height:2px;background:var(--bg3);border-radius:1px;overflow:hidden;margin-top:4px}
+  .ctab-pbar-fill{height:100%;background:var(--gold);border-radius:1px}
+  .ctab-rec-badge{font-size:10px;font-weight:700;background:var(--gold);color:#1a1200;padding:1px 7px;border-radius:8px;margin-left:6px;letter-spacing:.2px}
+
 </style>
 </head>
 <body>
@@ -328,6 +404,16 @@
 
 <div class="app">
 
+
+<!-- ════════ READINESS ASSESSMENT ════════ -->
+<div id="sr" class="screen">
+  <div class="lbar">
+    <div class="btitle">Readiness Assessment</div>
+    <span class="bbadge" style="background:var(--abg);border:1px solid rgba(210,153,34,.3);color:#e3b341" id="ra-badge">1 of 12</span>
+  </div>
+  <div id="ra-body"></div>
+</div>
+
 <!-- ════════ HOME / ACADEMY HUB ════════ -->
 <div id="sh" class="screen">
   <div class="hhero">
@@ -340,22 +426,18 @@
     <div class="hby">Crafted by <span>SOM GB</span> · Senior Operations &amp; Client Partnership Leader</div>
   </div>
 
-  <div class="diag-cta">
-    <h3>🧭 Not sure where to start?</h3>
-    <p>Answer 8 quick questions about your interests and strengths. We'll recommend the freelancing path that fits you best — but you're always welcome to choose any course you like.</p>
-    <button class="diag-btn" onclick="startDiag()">Take the Quick Assessment →</button>
-    <button class="diag-retake" id="diag-retake" onclick="startDiag()" style="display:none">Retake assessment</button>
-  </div>
-
   <div class="psec">
-    <div class="ptop"><span class="ptitle">Your overall progress</span><span class="pcnt" id="hc">0 of 9 courses started</span></div>
+    <div class="ptop"><span class="ptitle">Your overall progress</span><span class="pcnt" id="hc">0 of 11 courses started</span></div>
     <div class="pbar"><div class="pfill" id="hf" style="width:0%"></div></div>
   </div>
 
   <div id="rec-runner-wrap"></div>
 
-  <div class="mslabel"><span>All Courses</span></div>
-  <div class="mlist" id="course-list"></div>
+  <div class="mslabel" style="padding:18px 24px 10px">
+    <span>All Courses</span>
+    <button class="diag-retake" id="diag-retake" onclick="startAssessment()" style="display:none;text-decoration:underline;background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer">Retake Assessment</button>
+  </div>
+  <div class="ctab-wrap" id="course-list"></div>
 </div>
 
 <!-- ════════ DIAGNOSTIC ════════ -->
@@ -410,82 +492,167 @@ var COURSES = {"foundations": {"intro": "Before you learn any specific skill, yo
 // THE FREELANCE BLUEPRINT — ENGINE
 // ═══════════════════════════════════════════════════════════════
 
-// ─── DIAGNOSTIC QUESTIONS ───
-// Each option maps points to course IDs.
-var diagQuestions = [
+// ─── READINESS ASSESSMENT QUESTIONS ───────────────────────────────────────
+// 12 targeted questions: computer/internet, availability, English, skills, mindset, interest
+var raQuestions = [
   {
-    q: "When you picture your ideal work day, what sounds most satisfying?",
-    opts: [
-      {t:"Keeping everything organized and running smoothly behind the scenes", pts:{ea:3, admin:2}},
-      {t:"Creating posts, graphics, and content people actually engage with", pts:{smm:3}},
-      {t:"Working with numbers, records, and making everything balance", pts:{book:3}},
-      {t:"Building clever systems and automations that save hours of work", pts:{ai:3, ghl:2}}
+    id:'computer',
+    label:'Tech Setup',
+    q:'Do you currently have a computer (laptop or desktop) you can use for freelance work?',
+    hint:'A reliable computer is non-negotiable for remote work. Clients will need you available and responsive.',
+    opts:[
+      {t:'Yes — I have a dedicated laptop or desktop I use for work', pts:{ready:2}, flag:null},
+      {t:'Yes — but it is shared with family and not always available', pts:{ready:1}, flag:'⚠️ <strong>Shared computer:</strong> Consider setting a dedicated schedule or investing in your own device. Reliability is everything in remote work.'},
+      {t:'Not yet — I am planning to get one', pts:{ready:0}, flag:'❌ <strong>No computer yet:</strong> You will need at minimum a budget laptop (₱15,000–₱25,000) before taking on any client work. We recommend completing the training while saving for one.'},
+      {t:'I only have a smartphone', pts:{ready:0}, flag:'❌ <strong>Smartphone only:</strong> A laptop or desktop is required for most medical VA, billing, and EHR work. A phone cannot run the platforms clients use.'}
     ]
   },
   {
-    q: "How do you feel about working with numbers and details?",
-    opts: [
-      {t:"I love them — accuracy and precision feel satisfying", pts:{book:3, ea:1}},
-      {t:"I'm comfortable, but they're not my favorite thing", pts:{ecom:2, lead:1}},
-      {t:"I'd rather work with people or words than numbers", pts:{smm:2, cs:2}},
-      {t:"I prefer building things that handle the numbers for me", pts:{ai:2}}
+    id:'internet',
+    label:'Internet Reliability',
+    q:'How would you describe your internet connection?',
+    hint:'Clients — especially medical and US-based — expect fast, reliable communication and file access.',
+    opts:[
+      {t:'Stable fiber or broadband with consistent speed, plus a mobile backup', pts:{ready:2}, flag:null},
+      {t:'Stable most of the time but no backup — occasional outages', pts:{ready:1}, flag:'⚠️ <strong>No backup internet:</strong> A mobile data backup (even a prepaid SIM hotspot) is strongly recommended. One dropped connection during a client task creates real problems.'},
+      {t:'Inconsistent — frequent drops or slow speed', pts:{ready:0}, flag:'❌ <strong>Unstable internet:</strong> This is a blocker for client work. Medical records, EHR systems, and video calls all require consistent connectivity. Resolve this before applying to clients.'},
+      {t:'I am still setting up my home setup', pts:{ready:0}, flag:'❌ <strong>Setup in progress:</strong> Get your internet stable before pursuing clients. This is one of the first things clients check.'}
     ]
   },
   {
-    q: "Which of these would you most enjoy learning?",
-    opts: [
-      {t:"How to manage a busy executive's calendar and inbox", pts:{ea:3}},
-      {t:"How to run social media accounts that grow an audience", pts:{smm:3}},
-      {t:"How to manage online stores like Shopify and Amazon", pts:{ecom:3}},
-      {t:"How to find potential customers for businesses", pts:{lead:3}}
+    id:'availability',
+    label:'Availability',
+    q:'How many hours per week can you realistically dedicate to freelance training and client work?',
+    hint:'Be honest — overcommitting leads to missed deadlines and damaged client relationships.',
+    opts:[
+      {t:'30+ hours per week — freelancing is my primary focus', pts:{ready:2, commitment:'full'}, flag:null},
+      {t:'15–30 hours per week — I have another job but can build this seriously', pts:{ready:2, commitment:'part'}, flag:null},
+      {t:'5–15 hours per week — limited availability right now', pts:{ready:1, commitment:'light'}, flag:'⚠️ <strong>Limited hours:</strong> You can still start — but set realistic expectations. At 5–10 hrs/week, landing your first client may take 3–6 months instead of 4–8 weeks.'},
+      {t:'Less than 5 hours — I am mostly exploring right now', pts:{ready:0, commitment:'explore'}, flag:'💡 <strong>Just exploring:</strong> That is perfectly fine. Complete the Foundations course first and reassess your availability as you learn more.'}
     ]
   },
   {
-    q: "How do you feel about talking to people you don't know?",
-    opts: [
-      {t:"I enjoy it — I'm a natural communicator", pts:{cs:3, lead:2}},
-      {t:"I'm okay with it, especially in writing", pts:{re:2, smm:1}},
-      {t:"I prefer behind-the-scenes work with less direct contact", pts:{book:2, ai:2, admin:1}},
-      {t:"I like helping people solve their problems", pts:{cs:3}}
+    id:'english',
+    label:'English Communication',
+    q:'How comfortable are you communicating in written English with international clients?',
+    hint:'Most clients in medical, GHL, and high-paying niches are US-based. Clear written English is essential.',
+    opts:[
+      {t:'Very comfortable — I write professional emails and messages confidently', pts:{ready:2, english:'strong'}, flag:null},
+      {t:'Comfortable for most situations — I can handle professional communication', pts:{ready:2, english:'good'}, flag:null},
+      {t:'Basic — I understand English but struggle with professional writing', pts:{ready:1, english:'basic'}, flag:'⚠️ <strong>English gap:</strong> Start with courses that have lower communication demands (Bookkeeping, E-commerce data tasks) while actively improving your written English. Consider daily practice using AI tools for feedback.'},
+      {t:'Limited — English is a significant challenge for me', pts:{ready:0, english:'limited'}, flag:'❌ <strong>English is a barrier:</strong> Remote work with US clients requires professional English. We recommend dedicated language improvement before pursuing international clients.'}
     ]
   },
   {
-    q: "What kind of tools are you most curious about?",
-    opts: [
-      {t:"AI tools like ChatGPT and automation platforms", pts:{ai:3}},
-      {t:"Design tools like Canva and scheduling apps", pts:{smm:3}},
-      {t:"Accounting software like QuickBooks and Xero", pts:{book:3}},
-      {t:"CRM and property listing tools", pts:{re:3, ghl:2, medical:1}}
+    id:'typing',
+    label:'Typing Speed',
+    q:'How fast and accurately do you type?',
+    hint:'Medical transcription requires 65+ WPM. Billing and scheduling require 45+ WPM. General VA needs 40+ WPM.',
+    opts:[
+      {t:'65+ WPM with high accuracy — I type quickly and rarely make errors', pts:{ready:2, typing:'fast'}, flag:null},
+      {t:'45–65 WPM — comfortable and reasonably accurate', pts:{ready:2, typing:'medium'}, flag:null},
+      {t:'Below 45 WPM — I type but it is slow', pts:{ready:1, typing:'slow'}, flag:'⚠️ <strong>Typing speed:</strong> Medical transcription requires 65+ WPM. Practice daily at keybr.com or typingclub.com while completing this training.'},
+      {t:'I am not sure of my typing speed', pts:{ready:1, typing:'unknown'}, flag:'💡 <strong>Test your speed:</strong> Visit typingtest.com before applying for any role. Knowing your WPM helps you target the right courses and set accurate client expectations.'}
     ]
   },
   {
-    q: "Which industry sounds most interesting to support?",
-    opts: [
-      {t:"Real estate agents and property businesses", pts:{re:3}},
-      {t:"Online stores and e-commerce brands", pts:{ecom:3}},
-      {t:"Startups and busy founders", pts:{ea:2, ai:1}},
-      {t:"Any business that needs more customers", pts:{lead:2, smm:1}}
+    id:'experience',
+    label:'Work Background',
+    q:'Which best describes your current or most recent work experience?',
+    hint:'Your background gives us a head start on matching you to the right niche.',
+    opts:[
+      {t:'Healthcare — I have worked in a clinic, hospital, BPO health account, or medical-related role', pts:{medical:3, ready:2}, flag:null},
+      {t:'Business / Admin / BPO — I have done office work, data entry, customer service, or operations', pts:{ea:2, cs:2, ecom:1, ready:2}, flag:null},
+      {t:'Sales, marketing, or social media — I have done client-facing or digital marketing work', pts:{smm:3, lead:2, ghl:2, ready:2}, flag:null},
+      {t:'Finance, accounting, or bookkeeping — I have handled numbers or financial records', pts:{book:3, medical:1, ready:2}, flag:null},
+      {t:'Real estate, property, or leasing background', pts:{re:3, ready:2}, flag:null},
+      {t:'Student or no formal work experience yet', pts:{foundations:3, ready:1}, flag:'💡 <strong>Starting fresh:</strong> Begin with Freelancing Foundations — it is built exactly for you. No experience is needed to succeed, just commitment.'}
     ]
   },
   {
-    q: "How would your friends describe you?",
-    opts: [
-      {t:"Reliable and organized — the one who keeps things together", pts:{ea:2, admin:2, book:1}},
-      {t:"Creative and expressive", pts:{smm:3}},
-      {t:"Patient and helpful — people come to me for support", pts:{cs:3}},
-      {t:"Curious and techy — always trying new tools", pts:{ai:3}}
+    id:'tools',
+    label:'Tool Experience',
+    q:'Which of the following tools have you used before? (Pick the closest match)',
+    opts:[
+      {t:'Google Workspace (Docs, Sheets, Gmail, Calendar)', pts:{ea:2, cs:1, ready:1}, flag:null},
+      {t:'CRM tools — HubSpot, Salesforce, or similar', pts:{ghl:2, lead:2, re:1, ready:1}, flag:null},
+      {t:'Design tools — Canva, Adobe, or similar', pts:{smm:3, ready:1}, flag:null},
+      {t:'Accounting software — QuickBooks, Xero, or similar', pts:{book:3, medical:1, ready:1}, flag:null},
+      {t:'Healthcare or medical systems — EMR/EHR, billing software', pts:{medical:3, ready:2}, flag:null},
+      {t:'None of the above — I am starting from zero', pts:{foundations:2, ready:0}, flag:'💡 <strong>Starting from zero:</strong> That is completely fine. Every expert started here. Foundations first, then pick your niche.'}
     ]
   },
   {
-    q: "What matters most to you in a freelancing career right now?",
-    opts: [
-      {t:"Getting started fast with skills I can learn quickly", pts:{admin:2, cs:2, re:1}},
-      {t:"Earning the highest rates possible, even if it takes more learning", pts:{ai:3, ghl:2, medical:2, book:1}},
-      {t:"Doing creative work I enjoy", pts:{smm:2, ecom:1}},
-      {t:"Steady, in-demand work that's always needed", pts:{book:2, ea:1, cs:1}}
+    id:'interest',
+    label:'Course Interest',
+    q:'Which area of work sounds most exciting to you?',
+    opts:[
+      {t:'Medical and healthcare — helping clinics, patients, and healthcare providers run smoothly', pts:{medical:4}, flag:null},
+      {t:'Marketing systems — building funnels, automations, and CRM for businesses', pts:{ghl:4, lead:2}, flag:null},
+      {t:'AI and automation — building workflows that save businesses hours of work', pts:{ai:4, ghl:2}, flag:null},
+      {t:'Creative and social media — content, graphics, and audience growth', pts:{smm:4}, flag:null},
+      {t:'Executive support — managing schedules, inboxes, and high-level operations', pts:{ea:4}, flag:null},
+      {t:'Finance and numbers — bookkeeping, invoices, and financial records', pts:{book:4}, flag:null},
+      {t:'Customer service — helping people solve problems and feel taken care of', pts:{cs:4}, flag:null},
+      {t:'Real estate — property listings, leads, and transaction coordination', pts:{re:4}, flag:null},
+      {t:'E-commerce — managing online stores, products, and orders', pts:{ecom:4}, flag:null}
+    ]
+  },
+  {
+    id:'income',
+    label:'Income Goal',
+    q:'What is your primary income goal from freelancing in the next 6 months?',
+    opts:[
+      {t:'Earn a full-time income ($1,000–$2,000+/mo) and replace my current job', pts:{ready:2, medical:1, ghl:1, ai:1}, flag:null},
+      {t:'Earn supplemental income ($300–$800/mo) alongside existing work', pts:{ready:2}, flag:null},
+      {t:'Land my first client and build from there — income is secondary right now', pts:{ready:1, foundations:2}, flag:null},
+      {t:'I am exploring — no specific income target yet', pts:{ready:0, foundations:3}, flag:'💡 <strong>Still exploring:</strong> That is a great place to start. Foundations will help you understand the real income potential and set a concrete goal.'}
+    ]
+  },
+  {
+    id:'commitment',
+    label:'Learning Commitment',
+    q:'When you start learning a new skill, which best describes you?',
+    opts:[
+      {t:'I go all-in — I set a schedule, take notes, and practice consistently until I master it', pts:{ready:2}, flag:null},
+      {t:'I am disciplined but need some external accountability to stay on track', pts:{ready:2}, flag:null},
+      {t:'I start strong but tend to lose momentum after a few weeks', pts:{ready:1}, flag:'⚠️ <strong>Consistency challenge:</strong> Set a non-negotiable daily minimum — even 30 minutes. Freelancing rewards those who show up consistently far more than those who sprint and stop.'},
+      {t:'I am still figuring out how to build a learning habit', pts:{ready:0}, flag:'💡 <strong>Building the habit:</strong> Start with one 25-minute session per day. Complete the Foundations course first — it is designed to build momentum quickly.'}
+    ]
+  },
+  {
+    id:'strengths',
+    label:'Your Strengths',
+    q:'How would people who know you well describe you professionally?',
+    opts:[
+      {t:'Detail-oriented and precise — I catch things others miss and I hate errors', pts:{medical:2, book:2, ea:1}, flag:null},
+      {t:'Creative and expressive — I think visually and love making things look good', pts:{smm:3, ghl:1}, flag:null},
+      {t:'Systems thinker — I love building efficient processes and automations', pts:{ai:3, ghl:3, medical:1}, flag:null},
+      {t:'People person — I communicate well and genuinely enjoy helping others', pts:{cs:3, ea:2, medical:1}, flag:null},
+      {t:'Analytical and numbers-driven — I trust data and logic over intuition', pts:{book:3, medical:2, lead:1}, flag:null},
+      {t:'Fast learner — I pick up new tools and systems quickly', pts:{ghl:2, ai:2, medical:2, ready:1}, flag:null}
+    ]
+  },
+  {
+    id:'timeline',
+    label:'Timeline',
+    q:'When do you realistically plan to apply for your first freelance client?',
+    opts:[
+      {t:'Within the next 30 days — I am ready to move fast', pts:{ready:2}, flag:null},
+      {t:'1–3 months — I want to build a solid foundation first', pts:{ready:2}, flag:null},
+      {t:'3–6 months — I am being thorough and patient', pts:{ready:1}, flag:null},
+      {t:'Not sure yet — I need to learn more before committing to a timeline', pts:{ready:0, foundations:2}, flag:'💡 <strong>No timeline yet:</strong> That is honest — and that is okay. The Foundations course will help you build a realistic 60–90 day roadmap.'}
     ]
   }
 ];
+
+// ─── READINESS STATE ───────────────────────────────────────────────────────
+var raAnswers = {}, raQ = 0, raFlags = [], raReadyScore = 0;
+var assessmentPassed = false;
+
+try { assessmentPassed = localStorage.getItem('gb_ra_passed') === '1'; } catch(e){}
+
+// ─── COURSE METADATA ───────────────────────────────────────────────────────
 
 // ─── COURSE METADATA (content lives in COURSES below) ───
 var courseMeta = [
@@ -501,6 +668,157 @@ var courseMeta = [
   {id:"ghl", icon:"🚀", iconBg:"var(--goldbg)", name:"Go High Level Mastery", level:"Advanced", levelClass:"cl-adv", desc:"Build funnels, run CRM, launch automations, and get hired as a GHL VA — zero experience needed.", time:"6-8 hrs", modules:6},
   {id:"medical", icon:"🏥", iconBg:"var(--tealbg)", name:"Medical VA Mastery", level:"Advanced", levelClass:"cl-adv", desc:"From medical terminology to billing, coding, HIPAA, EHR systems, transcription, and VA management — the highest-paying VA niche.", time:"8-10 hrs", modules:8}
 ];
+
+
+// ─── ASSESSMENT ENGINE ────────────────────────────────────────────────────
+function startAssessment(){
+  raAnswers={};raQ=0;raFlags=[];raReadyScore=0;
+  show('sr');renderRAQ();
+}
+
+function renderRAQ(){
+  var total=raQuestions.length;
+  if(raQ>=total){computeRA();return}
+  var q=raQuestions[raQ];
+  var pct=Math.round(raQ/total*100);
+  document.getElementById('ra-badge').textContent=(raQ+1)+' of '+total;
+  var answered=raAnswers[q.id]!==undefined;
+  var h='<div class="ra-hero">';
+  h+='<div class="ra-label">'+q.label+' · Question '+(raQ+1)+' of '+total+'</div>';
+  h+='<div class="ra-title">'+q.q+'</div>';
+  if(q.hint) h+='<div class="ra-sub">'+q.hint+'</div>';
+  h+='<div class="ra-progress"><div class="ra-pfill" style="width:'+pct+'%"></div></div>';
+  h+='</div>';
+  h+='<div class="ra-qwrap"><div class="ra-qcard"><div class="ra-opts">';
+  q.opts.forEach(function(o,i){
+    var sel=raAnswers[q.id]===i;
+    h+='<button class="ra-opt'+(sel?' selected':'')+'" onclick="selectRA('+i+')">'+o.t+'</button>';
+  });
+  h+='</div></div></div>';
+  h+='<div class="ra-nav">';
+  h+='<button class="ra-back" '+(raQ===0?'style="visibility:hidden"':'')+' onclick="prevRA()">← Back</button>';
+  h+='<button class="ra-next" id="ra-next-btn" '+(answered?'':'disabled')+' onclick="nextRA()">'+
+    (raQ===total-1?'See My Results →':'Next →')+'</button>';
+  h+='</div>';
+  document.getElementById('ra-body').innerHTML=h;
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function selectRA(idx){
+  var q=raQuestions[raQ];
+  raAnswers[q.id]=idx;
+  document.querySelectorAll('.ra-opt').forEach(function(b,i){
+    b.classList.toggle('selected',i===idx);
+  });
+  document.getElementById('ra-next-btn').disabled=false;
+}
+
+function nextRA(){
+  if(raAnswers[raQuestions[raQ].id]===undefined) return;
+  raQ++;renderRAQ();
+}
+function prevRA(){if(raQ>0){raQ--;renderRAQ();}}
+
+function computeRA(){
+  // Tally scores
+  var scores={},readyPts=0,readyMax=raQuestions.length*2;
+  raFlags=[];
+  raQuestions.forEach(function(q){
+    var idx=raAnswers[q.id];
+    if(idx===undefined) return;
+    var o=q.opts[idx];
+    if(o.pts){
+      for(var k in o.pts){
+        if(k==='ready'){readyPts+=o.pts[k];}
+        else{scores[k]=(scores[k]||0)+o.pts[k];}
+      }
+    }
+    if(o.flag) raFlags.push(o.flag);
+  });
+  // Map admin → ea
+  if(scores.admin){scores.ea=(scores.ea||0)+scores.admin;delete scores.admin;}
+  if(scores.foundations){scores.foundations=(scores.foundations||0);}
+  // Find best course
+  var best=null,bestScore=-1;
+  for(var k in scores){if(scores[k]>bestScore&&courseMeta.find(function(c){return c.id===k;})){bestScore=scores[k];best=k;}}
+  if(!best) best='foundations';
+  recommendedCourse=best;
+  raReadyScore=Math.round(readyPts/readyMax*100);
+  renderRAResult();
+}
+
+function renderRAResult(){
+  var rc=courseMeta.find(function(c){return c.id===recommendedCourse;});
+  var pct=raReadyScore;
+  var tier=pct>=70?'ready':pct>=45?'almost':'prep';
+  var tierLabel=pct>=70?'READY':'ALMOST THERE';
+  if(tier==='prep') tierLabel='PREP NEEDED';
+
+  var tierMsg={
+    ready:'You have the setup, mindset, and readiness to start taking on clients. Your recommended path is below — begin today.',
+    almost:'You are close. Address the flagged items below and you will be client-ready within 30–60 days.',
+    prep:'There are a few foundational things to sort out before pursuing clients. The flags below show exactly what to work on first.'
+  };
+
+  var reasons={
+    foundations:'You are at the start of your journey — and that is the perfect place to begin. Foundations will give you the clarity, confidence, and structure to build from.',
+    ea:'Your organized, reliable nature and admin background make Executive Assistant the strongest entry point. It is the most in-demand path for Filipino VAs.',
+    smm:'Your creative instincts and tool experience make Social Media Management a natural fit. Businesses everywhere need consistent, skilled social media support.',
+    cs:'Your communication strengths and people-first approach are exactly what great customer support looks like. This niche is always hiring.',
+    re:'Your profile fits real estate support well — detail orientation, fast communication, and a knack for coordination.',
+    lead:'Your comfort with outreach and finding opportunities fits lead generation perfectly across nearly every industry.',
+    ecom:'Your blend of detail and interest in online business makes e-commerce support a strong, steady match.',
+    book:'Your love for numbers and accuracy is rare and valuable. Bookkeeping is high-trust, high-pay, and always in demand.',
+    ai:'Your curiosity for systems and automation points directly to the highest-growth niche — and one with very little competition right now.',
+    ghl:'Your interest in marketing systems and tools is a perfect fit for Go High Level — the most in-demand all-in-one CRM platform in the market.',
+    medical:'Your background and detail-oriented strengths make Medical VA the ideal path — the highest-paying VA niche, with demand that never slows down.'
+  };
+
+  var h='<div class="ra-result">';
+  h+='<div class="ra-score-ring '+tier+'">';
+  h+='<div class="ra-score-pct">'+pct+'%</div>';
+  h+='<div class="ra-score-tag">'+tierLabel+'</div>';
+  h+='</div>';
+  h+='<div class="ra-res-title">';
+  if(tier==='ready') h+='You are ready to begin 🎯';
+  else if(tier==='almost') h+='Almost there — a few things to address 💪';
+  else h+='Build the foundation first 🔧';
+  h+='</div>';
+  h+='<div class="ra-res-sub">'+tierMsg[tier]+'</div>';
+
+  // Recommended course
+  h+='<div style="background:var(--goldbg);border:1px solid rgba(201,168,76,.3);border-radius:var(--rlg);padding:16px;margin-bottom:16px">';
+  h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gold);margin-bottom:8px">⭐ Your Best-Fit Course</div>';
+  h+='<div style="font-size:22px;margin-bottom:4px">'+rc.icon+'</div>';
+  h+='<div style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px;font-family:var(--serif)">'+rc.name+'</div>';
+  h+='<div style="font-size:13px;color:rgba(226,192,106,.8);line-height:1.55;margin-bottom:12px">'+(reasons[recommendedCourse]||rc.desc)+'</div>';
+  h+='</div>';
+
+  // Flags
+  if(raFlags.length>0){
+    h+='<div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin-bottom:8px">Things to address</div>';
+    h+='<div class="ra-flags">';
+    raFlags.forEach(function(f){
+      h+='<div class="ra-flag"><span class="ra-flag-icon">⚠️</span><span>'+f+'</span></div>';
+    });
+    h+='</div>';
+  }
+
+  h+='<button class="ra-cta-btn" onclick="enterCourses()">Enter the Academy →</button>';
+  h+='<button class="ra-retake" onclick="startAssessment()">Retake assessment</button>';
+  h+='</div>';
+  document.getElementById('ra-body').innerHTML=h;
+  window.scrollTo({top:0,behavior:'instant'});
+  // Save passed state
+  try{localStorage.setItem('gb_ra_passed','1');localStorage.setItem('gb_ra_rec',recommendedCourse);}catch(e){}
+  assessmentPassed=true;
+}
+
+function enterCourses(){
+  renderHome();show('sh');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
 
 // ─── STATE ───
 var progress = {}; // {courseId: {done:[bool], }}
@@ -518,12 +836,12 @@ function initProgress(){
 
 // ─── NAVIGATION ───
 function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'instant'})}
-function goHome(){renderHome();show('sh')}
+function goHome(){renderHome();show('sh');}
 
 // ─── HOME / HUB ───
 function renderHome(){
   // overall progress
-  var started=0, totalModulesDone=0, totalModules=0;
+  var started=0,totalModulesDone=0,totalModules=0;
   courseMeta.forEach(function(c){
     var p=progress[c.id];
     var mods=c.modules||4;
@@ -538,35 +856,67 @@ function renderHome(){
   document.getElementById('hf').style.width=pct+'%';
   document.getElementById('hc').textContent=started+' of '+courseMeta.length+' courses started';
 
-  // recommended runner
-  var runWrap=document.getElementById('rec-runner-wrap');
-  if(recommendedCourse){
-    var rc=courseMeta.find(function(c){return c.id===recommendedCourse});
-    document.getElementById('diag-retake').style.display='block';
-    runWrap.innerHTML='<div class="drunner"><div class="drunner-label">⭐ Your recommended path</div></div>';
-  } else {
-    runWrap.innerHTML='';
-  }
+  // show retake button if assessment was done
+  var retakeBtn=document.getElementById('diag-retake');
+  if(retakeBtn) retakeBtn.style.display=assessmentPassed?'inline':'none';
 
-  // course list
+  // recommended runner
+  try{if(!recommendedCourse){var s=localStorage.getItem('gb_ra_rec');if(s)recommendedCourse=s;}}catch(e){}
+
+  // ── GROUPED TABLE LAYOUT ──
+  var groups=[
+    {
+      label:'Foundation', cls:'lvl-found', emoji:'🌱',
+      ids:['foundations']
+    },
+    {
+      label:'Beginner', cls:'lvl-beg', emoji:'📘',
+      ids:['ea','smm','cs','re']
+    },
+    {
+      label:'Intermediate', cls:'lvl-inter', emoji:'📈',
+      ids:['lead','ecom','book']
+    },
+    {
+      label:'Advanced', cls:'lvl-adv', emoji:'🚀',
+      ids:['ai','ghl','medical']
+    }
+  ];
+
   var html='';
-  courseMeta.forEach(function(c){
-    var p=progress[c.id];
-    var d=p.done.filter(Boolean).length;
-    var pcc=Math.round(d/(c.modules||4)*100);
-    var isRec=recommendedCourse===c.id;
-    var isDone=d===4;
-    html+='<div class="ccard'+(isRec?' recommended':'')+(isDone?' done-course':'')+'" onclick="openCourse(\''+c.id+'\')">';
-    if(isRec) html+='<div class="rec-badge">RECOMMENDED FOR YOU</div>';
-    html+='<div class="cicon" style="background:'+c.iconBg+'">'+c.icon+'</div>';
-    html+='<div class="cinfo">';
-    html+='<div class="clevel '+c.levelClass+'">'+c.level+'</div>';
-    html+='<div class="cname">'+c.name+'</div>';
-    html+='<div class="cdesc">'+c.desc+'</div>';
-    html+='<div class="cmeta"><span>⏱ '+c.time+'</span><span>📚 '+c.modules+' modules</span>'+(d>0?'<span>✓ '+d+'/'+(c.modules||4)+' done</span>':'')+'</div>';
-    if(d>0) html+='<div class="cbar-mini"><div class="cbar-mini-fill" style="width:'+pcc+'%"></div></div>';
+  groups.forEach(function(g){
+    var groupCourses=g.ids.map(function(id){return courseMeta.find(function(c){return c.id===id;});}).filter(Boolean);
+    if(!groupCourses.length) return;
+    html+='<div class="ctab-group">';
+    html+='<div class="ctab-group-header">';
+    html+='<span style="font-size:16px">'+g.emoji+'</span>';
+    html+='<span class="ctab-group-title '+g.cls+'">'+g.label+'</span>';
+    html+='<span class="ctab-group-count">'+groupCourses.length+' course'+(groupCourses.length>1?'s':'')+'</span>';
     html+='</div>';
-    html+='<div class="cprog">'+(isDone?'✓':'→')+'</div>';
+    groupCourses.forEach(function(c){
+      var p=progress[c.id];
+      var d=p.done.filter(Boolean).length;
+      var mods=c.modules||4;
+      var pcc=Math.round(d/mods*100);
+      var isRec=recommendedCourse===c.id;
+      var isDone=d===mods;
+      var rowCls='ctab-row'+(isRec?' rec':'')+(isDone?' done':'');
+      html+='<div class="'+rowCls+'" onclick="openCourse(\''+c.id+'\')">';
+      html+='<div class="ctab-icon">'+c.icon+'</div>';
+      html+='<div class="ctab-info">';
+      html+='<div class="ctab-name">'+c.name+(isRec?'<span class="ctab-rec-badge">★ FOR YOU</span>':'')+'</div>';
+      html+='<div class="ctab-meta">';
+      html+='<span>'+c.time+'</span>';
+      html+='<span>'+mods+' modules</span>';
+      html+='<span class="'+c.levelClass+'">'+c.level+'</span>';
+      if(d>0&&!isDone) html+='<span>'+d+'/'+mods+' done</span>';
+      if(isDone) html+='<span style="color:var(--green2)">✓ Complete</span>';
+      html+='</div>';
+      if(d>0) html+='<div class="ctab-pbar"><div class="ctab-pbar-fill" style="width:'+pcc+'%"></div></div>';
+      html+='</div>';
+      html+='<div class="ctab-arrow">'+(isDone?'✓':'→')+'</div>';
+      html+='</div>';
+    });
     html+='</div>';
   });
   document.getElementById('course-list').innerHTML=html;
@@ -834,12 +1184,17 @@ function enterAcademy(){
   document.getElementById('sg').style.display='none';
   document.getElementById('main-ui').style.display='block';
   document.body.classList.remove('gate-open');
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active')});
-  document.getElementById('sh').classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
   if(typeof gtag !== 'undefined'){
     gtag('event','academy_entered',{event_category:'Email Gate'});
   }
+  // If assessment not yet passed, show it first
+  if(!assessmentPassed){
+    show('sr');renderRAQ();
+  } else {
+    try{var s=localStorage.getItem('gb_ra_rec');if(s)recommendedCourse=s;}catch(e){}
+    renderHome();show('sh');
+  }
+  window.scrollTo({top:0,behavior:'instant'});
 }
 
 // Check if already passed gate (returning visitor)
@@ -848,7 +1203,14 @@ function enterAcademy(){
     if(localStorage.getItem('gb_gate_passed')==='1'){
       document.getElementById('sg').style.display='none';
       document.getElementById('main-ui').style.display='block';
-      document.getElementById('sh').classList.add('active');
+      if(localStorage.getItem('gb_ra_passed')==='1'){
+        assessmentPassed=true;
+        var saved=localStorage.getItem('gb_ra_rec');
+        if(saved) recommendedCourse=saved;
+        renderHome();document.getElementById('sh').classList.add('active');
+      } else {
+        show('sr');renderRAQ();
+      }
     } else {
       document.getElementById('sg').style.display='flex';
       document.getElementById('main-ui').style.display='none';
