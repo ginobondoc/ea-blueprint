@@ -1200,9 +1200,16 @@ function enterAcademy(){
 // ─── INIT ───
 initProgress();
 
-// ─── Safe localStorage wrapper ───
 function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function lsClear(){try{localStorage.clear();}catch(e){}}
+
+// ── Version guard: if app version changed, wipe stale localStorage ──────────
+var APP_VERSION = '2.1';
+if(lsGet('gb_version') !== APP_VERSION){
+  lsClear();
+  lsSet('gb_version', APP_VERSION);
+}
 
 // Check if already passed gate (returning visitor)
 (function(){
